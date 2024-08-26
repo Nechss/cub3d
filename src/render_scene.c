@@ -60,9 +60,9 @@ void	cast_ray(t_cub *cub, char *wall_hit_direction)
 	cub->ray->y = cub->player.y;
 	while (1)
 	{
-		cub->ray->x += 0.001 * cos(cub->ray->angle);
-		cub->ray->y += 0.001 * sin(cub->ray->angle);
-		cub->ray->length += 0.001;
+		cub->ray->x += 0.005 * cos(cub->ray->angle);
+		cub->ray->y += 0.005 * sin(cub->ray->angle);
+		cub->ray->length += 0.005;
 		map_x = (int)(cub->ray->x);
 		map_y = (int)(cub->ray->y);
 		if (cub->ray->length > 1000)

@@ -24,7 +24,7 @@
 
 # define WIDTH	1024
 # define HEIGHT	768
-# define MOVE_SPEED 0.06
+# define MOVE_SPEED 0.08
 # define ROTATE_SPEED 0.05
 
 # define BLACK  0x00000000

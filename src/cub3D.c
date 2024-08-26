@@ -48,9 +48,10 @@ void	init_map(t_cub *cub)
 {
 
 	cub->fov_angle = 5 * M_PI / 12;
-	cub->tile_size = 24;
-
-	//map data
+	if (cub->map_height > cub->map_width)
+		cub->tile_size = (HEIGHT / 3) / cub->map_height;
+	else
+		cub->tile_size = (WIDTH / 3) / cub->map_width;
 	cub->player.x = 4;
 	cub->player.y = 5;
 	cub->player.angle = 0;
