@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/02/18 19:39:54 by gperez-b         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:44:51 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,26 @@ typedef struct s_cub
 	int	ignore;
 }	t_cub;
 
+typedef struct s_flags
+{
+	char	player;
+	int		close_wall;
+	int		empty_line;
+}	t_flags;
+
+typedef struct s_parse
+{
+	char			*tex_n;
+	char			*tex_s;
+	char			*tex_e;
+	char			*tex_w;
+	int				color_c[3];
+	int				color_f[3];
+	int				map_width;
+	int				map_height;
+	char			**map;
+	t_flags			*flags;
+}	t_parse;
 
 //------------Init----------------//
 
@@ -119,5 +139,8 @@ void	rotate_event(t_cub *cub);
 void	destroy(void* param);
 void	free_map(char **map);
 
+//-------------Parsing---------------//
+
+void	parsing_doc(char *map_doc, t_parse *parse);
 
 #endif
