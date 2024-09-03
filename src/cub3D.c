@@ -25,7 +25,7 @@ void	draw_pixel(mlx_image_t *img, int x, int y, int color)
 		*pixel = (color & 0xFFFFFF) | 0xFF000000;
 	}
 }
-
+		
 void	render(t_cub *cub)
 {
 	render_scene(cub);
@@ -132,7 +132,7 @@ int	main(int argc, char **argv)
 	parse.flags = &flags;
 	if (argc != 2)
 	{
-	//	parse.flags->close_wall = 4;
+		parse.flags->close_wall = 4;
 		printf("Usage: ./cub3D <map.cub>\nflag wall == %d\n", flags.close_wall);
 		exit(EXIT_FAILURE);
 	}

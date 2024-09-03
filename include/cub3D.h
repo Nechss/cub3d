@@ -98,6 +98,7 @@ typedef struct s_flags
 	char	player;
 	int		close_wall;
 	int		empty_line;
+	int		finish_map;
 }	t_flags;
 
 typedef struct s_parse
@@ -113,6 +114,12 @@ typedef struct s_parse
 	char			**map;
 	t_flags			*flags;
 }	t_parse;
+
+typedef struct s_m_list
+{
+    char			*line;
+    struct s_m_list *next;
+}	t_m_list;
 
 //------------Init----------------//
 

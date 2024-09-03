@@ -31,14 +31,22 @@ void	free_words(char **rslt)
 	free(rslt);
 }
 
-void	print_parse(t_parse *parse)
+void	print_parse(t_parse *parse, t_m_list *head)
 {
+	t_m_list *temp;
+
+	temp = head;
 	printf("Text_n = %s\n", parse->tex_n);
 	printf("Text_s = %s\n", parse->tex_s);
 	printf("Text_e = %s\n", parse->tex_e);
 	printf("Text_w = %s\n", parse->tex_w);
 	printf("Colors C = %d,%d,%d\n", parse->color_c[0], parse->color_c[1], parse->color_c[2]);
 	printf("Colors F = %d,%d,%d\n", parse->color_f[0], parse->color_f[1], parse->color_f[2]);
+	while(temp)
+	{
+		printf("-> %s\n", temp->line);
+		temp = temp->next; 
+	}
 }
 
 int count_rows(char **argv)
@@ -186,56 +194,134 @@ void	parse_color(char *line, t_parse *parse)
 	free(line);
 }
 
-int	parse_line_map(char *str, t_parse *parse)
+int check_first_char(char *str, int i)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	parse->flags->close_wall = 0;
 	while(str[i] && str[i] == ' ')
 		i++;
-	if (str[i] != '1')
-		ft_exit("Incorrect map");
-	j = i;
+	if(!str[i])
+		return (NULL);
+	if (str[i] && str[i] != '1')
+		ft_exit("Incorrect map at begining wall");
+	return (i);
+}
+
+int check_last_char(char *str, int i)
+{
 	while(str[i])
 		i++;
 	i--;
 	while(str[i] && str[i] == ' ')
 		i--;
-	while(i > j)
-	{
-		if(str[i] != '0' && str[i] != '1' && str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W' && str[i] != ' ')  
-			ft_exit("Incorrect map: bad caracter");
-		if(parse->flags->close_wall == 0 && str[i] != '1')
-			ft_exit("Incorrect map: bad wall");
-		else if (str[i] == '1')
-		{
-			parse->flags->close_wall = 1;
-			if (parse->map_width < i)
-				parse->map_width = i;
-		}
-		if (str[i] && str[i] == ' ')
-		{
-			if(str[i + 1] != '1')
-				ft_exit("Incorrect map: bad wall en el hueco");
-			parse->flags->close_wall = 0;
-			while(str[i] && str[i] == ' ')
-				i--;
-			i++;
-		}
-		i--;
-	}
-	return (0);
+	if (str[i] != '1')
+		ft_exit("Incorrect map at finish wall");
+	return (i);
 }
 
-void	parse_map(char *line, t_parse *parse)
+void check_char_type(char *str, int i)
 {
-	parse_line_map(line, parse);
-//	printf("row_map = %s\n", parse->map[0]);
-	printf("line = %s\n", line);
+	if(str[i] != '0' && str[i] != '1' && str[i] != 'N' \
+	&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W' \
+	&& str[i] != ' ')  
+		ft_exit("Incorrect map: bad caracter");	
 }
-void	check_line(char *line, t_parse *parse)
+
+int check_wall(char *str, t_parse *parse, int i)
+{
+	if(parse->flags->close_wall == 0 && str[i] != '1')
+		ft_exit("Incorrect map: bad wall");
+	else if (str[i] == '1')
+	{
+		parse->flags->close_wall = 1;
+		if (parse->map_width < i)
+			parse->map_width = i;
+	}
+	if (str[i] && str[i] == ' ')
+	{
+		if(str[i + 1] != '1')
+			ft_exit("Incorrect map: bad wall en el hueco");
+		parse->flags->close_wall = 0;
+		while(str[i] && str[i] == ' ')
+			i--;
+		i++;
+	}
+	i--;
+	return (i);
+}
+
+t_m_list *create_node(char *line)
+{
+    t_m_list *new_node;
+
+    new_node = (t_m_list *)malloc(sizeof(t_m_list));
+    if (!new_node) {
+        return NULL;
+    }
+    new_node->line = ft_strdup(line);
+    new_node->next = NULL;
+    return new_node;
+}
+
+void add_node(t_m_list **head, char *line)
+{
+    t_m_list *new_node = create_node(line);
+    t_m_list *temp;
+
+	if (!new_node) {
+        return;
+    }
+    if (*head == NULL)
+        *head = new_node;
+	else
+	{
+        temp = *head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = new_node;
+    }
+}
+
+int	parse_line_map(char *str, t_parse *parse)
+{
+	int	i;
+	int	j;
+	int	last_char;
+
+	i = 0;
+	parse->flags->close_wall = 0;
+    i = check_first_char(str, i);
+	if (!i)
+		return(NULL);
+	j = i;
+	i = check_last_char(str, i);
+	last_char = i;
+	while(i > j)
+	{
+		check_char_type(str, i);
+		i = check_wall(str, parse, i);
+	}
+	return (last_char);
+}
+
+
+void	parse_map(char *line, t_parse *parse, t_m_list **head)
+{
+	int last_char;
+//	t_m_list *temp;
+
+	last_char = parse_line_map(line, parse);
+	if(last_char)
+	{
+		last_char++;
+		line[last_char] = '\0';
+		add_node(head, line);
+	}
+	else
+		parse->flags->finish_map = 1;
+//	temp = *head;
+//	printf("row_map = %s\n", parse->map[0]);
+	printf("CHECKline = %s\n", (*head)->line);
+}
+void	check_line(char *line, t_parse *parse, t_m_list **head)
 {
 	printf("check_line = %s\n", line);
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
@@ -243,7 +329,7 @@ void	check_line(char *line, t_parse *parse)
 	else if(line[0] == 'F' || line[0] == 'C')
 		parse_color(line, parse);
 	else
-		parse_map(line, parse);
+		parse_map(line, parse, head);
 }
 
 
@@ -264,18 +350,33 @@ void	init_struct(t_parse *parse)
 	parse->map = NULL;
 }
 
+/*void create_map(char *line, t_parse *parse, int i)
+{
+	int j;
+
+	j = 0;
+	while(line[j] || line[j] != '\n')
+		j++;
+	j--;
+	while(line[j] != '1')
+		j--;
+	parse->map[i] = ft_strdup(
+}*/
+
 void	parsing_doc(char *map_doc, t_parse *parse)
 {
 	char *line;
 	char *clean_line;
 	int		fd;
+	t_m_list *list;
 
+	list = NULL;
 	line = NULL;
 	init_struct(parse);
 	fd = (open(map_doc, O_RDONLY));
 	if (fd  == -1)
 		printf("Failed to read document .cub\n");	
-	while(1)
+	while(parse->flags->finish_map != 1)
 	{
 		line = get_next_line(fd);
 		if(!line)
@@ -286,11 +387,10 @@ void	parsing_doc(char *map_doc, t_parse *parse)
 			continue;
 		}
 		clean_line = ft_strtrim(line, "\n");
-	//	line[ft_strlen(line)] = (char)0;
-		check_line(clean_line, parse);
+		check_line(clean_line, parse, &list);
 		free(line);
 		free(clean_line);
 	}
-	print_parse(parse);
+	print_parse(parse, list);
 	exit(0);
 }
