@@ -199,7 +199,7 @@ int check_first_char(char *str, int i)
 	while(str[i] && str[i] == ' ')
 		i++;
 	if(!str[i])
-		return (NULL);
+		return (-1);
 	if (str[i] && str[i] != '1')
 		ft_exit("Incorrect map at begining wall");
 	return (i);
@@ -289,8 +289,8 @@ int	parse_line_map(char *str, t_parse *parse)
 	i = 0;
 	parse->flags->close_wall = 0;
     i = check_first_char(str, i);
-	if (!i)
-		return(NULL);
+	if (i == -1)
+		return(-1);
 	j = i;
 	i = check_last_char(str, i);
 	last_char = i;
@@ -309,21 +309,23 @@ void	parse_map(char *line, t_parse *parse, t_m_list **head)
 //	t_m_list *temp;
 
 	last_char = parse_line_map(line, parse);
-	if(last_char)
+	if(last_char >= 0 && parse->flags->finish_map != 1)
 	{
 		last_char++;
 		line[last_char] = '\0';
 		add_node(head, line);
 	}
-	else
+	else if (parse->flags->finish_map != 1)
 		parse->flags->finish_map = 1;
+	else
+		ft_exit("EMpty line detected\n");
 //	temp = *head;
 //	printf("row_map = %s\n", parse->map[0]);
-	printf("CHECKline = %s\n", (*head)->line);
+//	printf("CHECKline = %s\n", (*head)->line);
 }
 void	check_line(char *line, t_parse *parse, t_m_list **head)
 {
-	printf("check_line = %s\n", line);
+//	printf("check_line = %s\n", line);
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
 		parse_texture(line, parse);
 	else if(line[0] == 'F' || line[0] == 'C')
@@ -370,13 +372,13 @@ void	parsing_doc(char *map_doc, t_parse *parse)
 	int		fd;
 	t_m_list *list;
 
-	list = NULL;
-	line = NULL;
+	//list = NULL;
+	//line = NULL;
 	init_struct(parse);
 	fd = (open(map_doc, O_RDONLY));
 	if (fd  == -1)
 		printf("Failed to read document .cub\n");	
-	while(parse->flags->finish_map != 1)
+	while(1)
 	{
 		line = get_next_line(fd);
 		if(!line)
