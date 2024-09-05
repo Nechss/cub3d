@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/08/31 16:17:26 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:53:43 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void	parse_texture(char *line, t_parse *parse)
 		parse->tex_e = ft_strdup(temp);
 	else if (line[0] == 'W' && line[1] == 'E')
 		parse->tex_w = ft_strdup(temp);
-/*	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w) 
-		ft_exit("Failed to load texture");*/
 	free(temp);
 }
 
@@ -142,9 +140,8 @@ void	check_limits(char *str)
 {
 	if (ft_strlen(str) > 3)
 		ft_exit("Number too long");
-	/*if (str[0] == '-')
+	if (str[0] == '-')
 		ft_exit("Invalid negative number");
-	*/
 }
 
 void	convert_num_color(char **colors, int color_x[3])
@@ -278,6 +275,7 @@ void add_node(t_m_list **head, char *line)
             temp = temp->next;
         temp->next = new_node;
     }
+//	printf("ENTRa con line = %s\n\n", line);
 }
 
 int	parse_line_map(char *str, t_parse *parse)
@@ -308,6 +306,8 @@ void	parse_map(char *line, t_parse *parse, t_m_list **head)
 	int last_char;
 //	t_m_list *temp;
 
+	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w) 
+		ft_exit("Failed to load texture");
 	last_char = parse_line_map(line, parse);
 	if(last_char >= 0 && parse->flags->finish_map != 1)
 	{
@@ -365,6 +365,7 @@ void	init_struct(t_parse *parse)
 	parse->map[i] = ft_strdup(
 }*/
 
+
 void	parsing_doc(char *map_doc, t_parse *parse)
 {
 	char *line;
@@ -377,7 +378,7 @@ void	parsing_doc(char *map_doc, t_parse *parse)
 	init_struct(parse);
 	fd = (open(map_doc, O_RDONLY));
 	if (fd  == -1)
-		printf("Failed to read document .cub\n");	
+		ft_exit("Failed to read document .cub");	
 	while(1)
 	{
 		line = get_next_line(fd);
@@ -393,6 +394,7 @@ void	parsing_doc(char *map_doc, t_parse *parse)
 		free(line);
 		free(clean_line);
 	}
+//	check_info_parsed(parse);
 	print_parse(parse, list);
 	exit(0);
 }
