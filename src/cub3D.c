@@ -128,15 +128,17 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 	t_parse parse;
 	t_flags flags;
+	t_maplist *tok_list;
 
 	parse.flags = &flags;
+	tok_list = NULL;
 	if (argc != 2)
 	{
 		parse.flags->close_wall = 4;
 		printf("Usage: ./cub3D <map.cub>\nflag wall == %d\n", flags.close_wall);
 		exit(EXIT_FAILURE);
 	}
-	parsing_doc(argv[1], &parse); 
+	parsing_doc(argv[1], &parse, &tok_list); 
 	set_win(&cub);
 	get_map(&cub, argv[1]);
 	get_textures(&cub);

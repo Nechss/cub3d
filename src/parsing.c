@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/05 18:53:43 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:52:24 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ void	free_words(char **rslt)
 	free(rslt);
 }
 
-void	print_parse(t_parse *parse, t_m_list *head)
+void	print_parse(t_parse *parse)
 {
-	t_m_list *temp;
+	int i;
 
-	temp = head;
+	i = 0;
 	printf("Text_n = %s\n", parse->tex_n);
 	printf("Text_s = %s\n", parse->tex_s);
 	printf("Text_e = %s\n", parse->tex_e);
 	printf("Text_w = %s\n", parse->tex_w);
 	printf("Colors C = %d,%d,%d\n", parse->color_c[0], parse->color_c[1], parse->color_c[2]);
 	printf("Colors F = %d,%d,%d\n", parse->color_f[0], parse->color_f[1], parse->color_f[2]);
-	while(temp)
+	while(parse->map[i])
 	{
-		printf("-> %s\n", temp->line);
-		temp = temp->next; 
+		printf("-> %s\n", parse->map[i]);
+		i++;
 	}
 }
 
@@ -245,29 +245,28 @@ int check_wall(char *str, t_parse *parse, int i)
 	return (i);
 }
 
-t_m_list *create_node(char *line)
+t_maplist *create_node(char *line)
 {
-    t_m_list *new_node;
+    t_maplist *new_node;
 
-    new_node = (t_m_list *)malloc(sizeof(t_m_list));
-    if (!new_node) {
+    new_node = (t_maplist *)malloc(sizeof(t_maplist));
+    if (!new_node)
         return NULL;
-    }
     new_node->line = ft_strdup(line);
     new_node->next = NULL;
     return new_node;
 }
 
-void add_node(t_m_list **head, char *line)
+void add_node(char *line, t_maplist **head)
 {
-    t_m_list *new_node = create_node(line);
-    t_m_list *temp;
+    t_maplist *new_node;
+    t_maplist *temp;
 
-	if (!new_node) {
+	new_node = create_node(line);
+	if (!new_node)
         return;
-    }
     if (*head == NULL)
-        *head = new_node;
+		*head = new_node;
 	else
 	{
         temp = *head;
@@ -275,7 +274,6 @@ void add_node(t_m_list **head, char *line)
             temp = temp->next;
         temp->next = new_node;
     }
-//	printf("ENTRa con line = %s\n\n", line);
 }
 
 int	parse_line_map(char *str, t_parse *parse)
@@ -301,10 +299,9 @@ int	parse_line_map(char *str, t_parse *parse)
 }
 
 
-void	parse_map(char *line, t_parse *parse, t_m_list **head)
+void	parse_map(char *line, t_parse *parse, t_maplist **head)
 {
 	int last_char;
-//	t_m_list *temp;
 
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w) 
 		ft_exit("Failed to load texture");
@@ -313,17 +310,15 @@ void	parse_map(char *line, t_parse *parse, t_m_list **head)
 	{
 		last_char++;
 		line[last_char] = '\0';
-		add_node(head, line);
+		add_node(line, head);
 	}
 	else if (parse->flags->finish_map != 1)
 		parse->flags->finish_map = 1;
 	else
 		ft_exit("EMpty line detected\n");
-//	temp = *head;
-//	printf("row_map = %s\n", parse->map[0]);
-//	printf("CHECKline = %s\n", (*head)->line);
 }
-void	check_line(char *line, t_parse *parse, t_m_list **head)
+
+void	check_line(char *line, t_parse *parse, t_maplist **head)
 {
 //	printf("check_line = %s\n", line);
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
@@ -352,29 +347,61 @@ void	init_struct(t_parse *parse)
 	parse->map = NULL;
 }
 
-/*void create_map(char *line, t_parse *parse, int i)
+int	map_height(t_maplist **head)
 {
-	int j;
+	t_maplist	*temp;
+	int			height;
 
-	j = 0;
-	while(line[j] || line[j] != '\n')
-		j++;
-	j--;
-	while(line[j] != '1')
-		j--;
-	parse->map[i] = ft_strdup(
-}*/
+	temp = *head;
+	height = 0;
+	while(temp->next)
+	{
+		temp = temp->next;
+		height++;
+	}
+	return (height + 1);
+}
 
+void fill_map(t_parse *parse, t_maplist **head)
+{
+	t_maplist	*temp;
+	int			i;
+	size_t		len;
 
-void	parsing_doc(char *map_doc, t_parse *parse)
+	temp = *head;
+	i = 0;
+	while(i < parse->map_height)
+	{
+		len = ft_strlen(temp->line);
+		parse->map[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!parse->map[i])
+			ft_exit("Error de malloc 2");
+		if (ft_strlcpy(parse->map[i], temp->line, len + 1) != len)
+			ft_exit("Error in ft_strlcpy");
+		temp = temp->next;
+		i++;
+	}
+}
+
+void create_map(t_parse *parse, t_maplist **head)
+{
+	int			height;
+
+	height = map_height(head);
+	parse->map = (char **)malloc((height + 1) * sizeof(char *));
+	if (!parse->map)
+		ft_exit("Error de malloc");
+	parse->map[height] = NULL;
+	parse->map_height = height;
+	fill_map(parse, head);
+}
+
+void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 {
 	char *line;
 	char *clean_line;
 	int		fd;
-	t_m_list *list;
 
-	//list = NULL;
-	//line = NULL;
 	init_struct(parse);
 	fd = (open(map_doc, O_RDONLY));
 	if (fd  == -1)
@@ -390,11 +417,12 @@ void	parsing_doc(char *map_doc, t_parse *parse)
 			continue;
 		}
 		clean_line = ft_strtrim(line, "\n");
-		check_line(clean_line, parse, &list);
+		check_line(clean_line, parse, head);
 		free(line);
 		free(clean_line);
 	}
+	create_map(parse, head);
 //	check_info_parsed(parse);
-	print_parse(parse, list);
+	print_parse(parse);
 	exit(0);
 }

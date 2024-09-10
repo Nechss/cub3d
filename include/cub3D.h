@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/05 18:55:24 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:14:40 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ typedef struct s_parse
 	t_flags			*flags;
 }	t_parse;
 
-typedef struct s_m_list
+typedef struct s_maplist
 {
     char			*line;
-    struct s_m_list *next;
-}	t_m_list;
+    struct s_maplist *next;
+}	t_maplist;
 
 //------------Init----------------//
 
@@ -148,6 +148,6 @@ void	free_map(char **map);
 
 //-------------Parsing---------------//
 
-void	parsing_doc(char *map_doc, t_parse *parse);
+void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **tok_list);
 
 #endif
