@@ -30,8 +30,8 @@ void	loop_hook(void *param)
 	cub = (t_cub *)param;
 	if (mlx_is_key_down(cub->mlx, ESC))
 		destroy(cub);
- 	move_event(cub, cub->player.x, cub->player.y);
- 	rotate_event(cub);
+	move_event(cub, cub->player.x, cub->player.y);
+	rotate_event(cub);
 }
 
 void	events(t_cub *cub)

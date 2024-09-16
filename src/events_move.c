@@ -24,16 +24,16 @@ void	can_move(float new_x, float new_y, t_cub *cub)
 	current_map_x = (int)(cub->player.x);
 	current_map_y = (int)(cub->player.y);
 	if (map_x >= 0 && map_x < cub->map_width
-		&& cub->map[current_map_y][map_x] != '1')
+		&& cub->map[current_map_y][(int)(new_x + 0.15)] != '1' &&
+			cub->map[current_map_y][(int)(new_x - 0.15)] != '1')
 		cub->player.x = new_x;
 	if (map_y >= 0 && map_y < cub->map_height
-		&& cub->map[map_y][current_map_x] != '1')
+		&& cub->map[(int)(new_y + 0.15)][current_map_x] != '1' &&
+			cub->map[(int)(new_y - 0.15)][current_map_x] != '1')
 		cub->player.y = new_y;
-//	if (cub->player.x == new_x || cub->player.y == new_y)
-//		render(cub);
 }
 
-float round_to_decimals(float value, int decimals)
+float	round_to_decimals(float value, int decimals)
 {
 	float	factor;
 
@@ -63,8 +63,8 @@ void	move_event(t_cub *cub, float new_x, float new_y)
 		new_x += MOVE_SPEED * cos(cub->player.angle + M_PI_2);
 		new_y += MOVE_SPEED * sin(cub->player.angle + M_PI_2);
 	}
-	new_x = round_to_decimals(new_x, 2);
-	new_y = round_to_decimals(new_y, 2);
+	//new_x = round_to_decimals(new_x, 3);
+	//new_y = round_to_decimals(new_y, 3);
 	can_move(new_x, new_y, cub);
 }
 
@@ -74,6 +74,6 @@ void	rotate_event(t_cub *cub)
 		cub->player.angle -= ROTATE_SPEED;
 	if (mlx_is_key_down(cub->mlx, RIGHT))
 		cub->player.angle += ROTATE_SPEED;
-	cub->player.angle = round_to_decimals(cub->player.angle, 2);
+	//cub->player.angle = round_to_decimals(cub->player.angle, 2);
 	render(cub);
 }

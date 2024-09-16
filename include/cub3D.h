@@ -26,6 +26,7 @@
 # define HEIGHT	768
 # define MOVE_SPEED 0.08
 # define ROTATE_SPEED 0.05
+# define RAY_STEP 0.005
 
 # define BLACK  0x00000000
 # define BLUE   0x00FF0000

@@ -26,9 +26,11 @@ void	render_floor_ceiling(t_cub *cub)
 {
 	int	x;
 	int	y;
+	int	half_height;
 
 	y = -1;
-	while (++y < HEIGHT / 2)
+	half_height = HEIGHT >> 1;
+	while (++y < half_height)
 	{
 		x = 0;
 		while (x < WIDTH)
@@ -48,47 +50,65 @@ void	render_floor_ceiling(t_cub *cub)
 	}
 }
 
+void	which_wall(char *wall_hit_direction, float hit_x, float hit_y)
+{
+	if (fabs(hit_x - 0.5) > fabs(hit_y - 0.5))
+	{
+		if (hit_x < 0.5)
+			*wall_hit_direction = 'W';
+		else
+			*wall_hit_direction = 'E';
+	}
+	else
+	{
+		if (hit_y < 0.5)
+			*wall_hit_direction = 'N';
+		else
+			*wall_hit_direction = 'S';
+	}
+}
+
 void	cast_ray(t_cub *cub, char *wall_hit_direction)
 {
 	int		map_x;
 	int		map_y;
-	float	hit_x;
-	float	hit_y;
 
 	cub->ray->length = 0;
 	cub->ray->x = cub->player.x;
 	cub->ray->y = cub->player.y;
 	while (1)
 	{
-		cub->ray->x += 0.005 * cos(cub->ray->angle);
-		cub->ray->y += 0.005 * sin(cub->ray->angle);
-		cub->ray->length += 0.005;
+		cub->ray->x += RAY_STEP * cos(cub->ray->angle);
+		cub->ray->y += RAY_STEP * sin(cub->ray->angle);
+		cub->ray->length += RAY_STEP;
 		map_x = (int)(cub->ray->x);
 		map_y = (int)(cub->ray->y);
 		if (cub->ray->length > 1000)
-			break;
+			break ;
 		if (map_x >= 0 && map_x < cub->map_width && map_y >= 0
 			&& map_y < cub->map_height && cub->map[map_y][map_x] == '1')
 		{
-			hit_x = cub->ray->x - map_x;
-			hit_y = cub->ray->y - map_y;
-			if (fabs(hit_x - 0.5) > fabs(hit_y - 0.5)) 
-			{
-				if (hit_x < 0.5)
-					*wall_hit_direction = 'W';
-				else
-					*wall_hit_direction = 'E';
-			}
-			else 
-			{
-				if (hit_y < 0.5)
-					*wall_hit_direction = 'N';
-				else
-					*wall_hit_direction = 'S';
-			}
-			break;
+			which_wall(wall_hit_direction, cub->ray->x - map_x,
+				cub->ray->y - map_y);
+			break ;
 		}
 	}
+}
+
+mlx_texture_t	*which_texture(t_cub *cub)
+{
+	mlx_texture_t	*texture;
+
+	texture = NULL;
+	if (cub->ray->direction == 'N')
+		texture = cub->tex_n;
+	if (cub->ray->direction == 'S')
+		texture = cub->tex_s;
+	if (cub->ray->direction == 'E')
+		texture = cub->tex_e;
+	if (cub->ray->direction == 'W')
+		texture = cub->tex_w;
+	return (texture);
 }
 
 void	render_wall(t_cub *cub, int ray_num, int y)
@@ -98,25 +118,19 @@ void	render_wall(t_cub *cub, int ray_num, int y)
 	int				texture_y;
 	uint32_t		color;
 
-	texture = NULL;
 	cub->ray->wall_height = (int)(cub->img->height / cub->ray->length);
-	if (cub->ray->direction == 'N')
-		texture = cub->tex_n;
-	if (cub->ray->direction == 'S')
-		texture = cub->tex_s;
-	if (cub->ray->direction == 'E')
-		texture = cub->tex_e;
-	if (cub->ray->direction == 'W')
-		texture = cub->tex_w;
+	texture = which_texture(cub);
 	if (cub->ray->direction == 'N' || cub->ray->direction == 'S')
 		texture_x = (int)((cub->ray->x - (int)cub->ray->x) * texture->width);
 	else
 		texture_x = (int)((cub->ray->y - (int)cub->ray->y) * texture->width);
 	while (++y < cub->ray->wall_height)
 	{
-		texture_y = (int)(y * texture->height / cub->ray->wall_height) % texture->height;
+		texture_y = (int)(y * texture->height / cub->ray->wall_height)
+			% texture->height;
 		color = get_texture_pixel(texture, texture_x, texture_y);
-		draw_pixel(cub->img, ray_num, (cub->img->height / 2) - (cub->ray->wall_height / 2) + y, color);
+		draw_pixel(cub->img, ray_num,
+			(cub->img->height >> 1) - (cub->ray->wall_height >> 1) + y, color);
 	}
 }
 
@@ -126,7 +140,6 @@ void	render_scene(t_cub *cub)
 	int		num_rays;
 	float	angle_step;
 	t_ray	ray;
-
 
 	i = -1;
 	num_rays = cub->img->width;
