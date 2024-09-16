@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/10 17:52:24 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:52:41 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	print_parse(t_parse *parse)
 	printf("Text_w = %s\n", parse->tex_w);
 	printf("Colors C = %d,%d,%d\n", parse->color_c[0], parse->color_c[1], parse->color_c[2]);
 	printf("Colors F = %d,%d,%d\n", parse->color_f[0], parse->color_f[1], parse->color_f[2]);
+	printf("Map width = %d\nMap height = %d\n\n", parse->map_width, parse->map_height);
 	while(parse->map[i])
 	{
 		printf("-> %s\n", parse->map[i]);
@@ -370,9 +371,12 @@ void fill_map(t_parse *parse, t_maplist **head)
 
 	temp = *head;
 	i = 0;
+	parse->map_width = 0;
 	while(i < parse->map_height)
 	{
 		len = ft_strlen(temp->line);
+		if (parse->map_width < (int)len)
+			parse->map_width = (int)len;
 		parse->map[i] = (char *)malloc((len + 1) * sizeof(char));
 		if (!parse->map[i])
 			ft_exit("Error de malloc 2");
@@ -394,6 +398,56 @@ void create_map(t_parse *parse, t_maplist **head)
 	parse->map[height] = NULL;
 	parse->map_height = height;
 	fill_map(parse, head);
+}
+
+void vetical_parse_map(t_parse *parse)
+{
+	int		y;
+	int		x;
+	char	**map;
+
+	y = 0;
+	x = 0;
+	map = parse->map;
+
+	while(x < parse->map_width)
+	{
+		y = 0;
+		while(y < parse->map_height)
+		{
+			if (map[y][x] == ' ')
+			{
+				if (y == 0)
+				{
+					while(map[y][x] == ' ')
+						y++;
+
+					if (map[y][x] != '1')
+						printf("Error 1 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+					else
+					{
+						if (map[y][x + 1] == '0')
+							printf("Error 2 wall open in vertilcal parse in x = %d y = %d\n", x + 1, y);
+					}
+				}
+				else
+				{
+				
+					//printf("map[x][y] = %c\n", map[y][x]);
+					if (map[y - 1][x + 1] != '1' && map[y - 1][x + 1] != ' ')
+						printf("Error 3 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+				}
+				//while (map[x][y] && map[x][y] != ' ')
+				//	y++;
+			}
+			else
+			{
+				printf("[%d][%d] / ", x, y);
+				y++;
+			}
+		}
+		x++;
+	}
 }
 
 void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
@@ -422,6 +476,7 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 		free(clean_line);
 	}
 	create_map(parse, head);
+	vetical_parse_map(parse);
 //	check_info_parsed(parse);
 	print_parse(parse);
 	exit(0);
