@@ -90,6 +90,8 @@ void	cast_ray(t_cub *cub, char *wall_hit_direction)
 		{
 			which_wall(wall_hit_direction, cub->ray->x - map_x,
 				cub->ray->y - map_y);
+			cub->ray->length = cos(cub->player.angle - cub->ray->angle)
+				* cub->ray->length;
 			break ;
 		}
 	}
