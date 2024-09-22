@@ -20,6 +20,10 @@ SRC         = cub3D.c         \
 			render_map.c    \
 			render_scene.c  \
 			parsing.c		\
+			parse_line.c	\
+			parse_utils.c	\
+			general_utils.c	\
+			parse_line_map.c\
 
 
 OBJ         = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

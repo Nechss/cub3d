@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/10 16:14:40 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:11:26 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,21 @@ void	rotate_event(t_cub *cub);
 
 void	destroy(void* param);
 void	free_map(char **map);
+void	ft_exit(char *str);
+void	free_words(char **rslt);
+
 
 //-------------Parsing---------------//
 
 void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **tok_list);
+int		parse_line_map(char *str, t_parse *parse);
+void	convert_num_color(char **colors, int color_x[3]);
+char	*trim_spaces(char *str);
+int		count_rows(char **argv);
+void	check_line(char *line, t_parse *parse, t_maplist **head);
+
+
+//-------------TEMPORAL---------------//
+void	print_parse(t_parse *parse);
 
 #endif
