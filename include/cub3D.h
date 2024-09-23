@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/22 12:11:26 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:23:29 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,11 @@ int		parse_line_map(char *str, t_parse *parse);
 void	convert_num_color(char **colors, int color_x[3]);
 char	*trim_spaces(char *str);
 int		count_rows(char **argv);
+void	create_map(t_parse *parse, t_maplist **head);
 void	check_line(char *line, t_parse *parse, t_maplist **head);
-
+void	add_node(char *line, t_maplist **head);
+void	init_struct(t_parse *parse);
+void	vetical_parse_map(t_parse *parse);
 
 //-------------TEMPORAL---------------//
 void	print_parse(t_parse *parse);
