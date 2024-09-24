@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/23 18:23:29 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:35:40 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	destroy(void* param);
 void	free_map(char **map);
 void	ft_exit(char *str);
 void	free_words(char **rslt);
-
+void	free_parse(t_parse *parse);
 
 //-------------Parsing---------------//
 

@@ -7,7 +7,7 @@ static int	map_height(t_maplist **head)
 
 	temp = *head;
 	height = 0;
-	while(temp->next)
+	while (temp->next)
 	{
 		temp = temp->next;
 		height++;
@@ -15,7 +15,7 @@ static int	map_height(t_maplist **head)
 	return (height + 1);
 }
 
-static int map_width(t_maplist **head)
+static int	map_width(t_maplist **head)
 {
 	t_maplist	*temp;
 	size_t		width;
@@ -31,7 +31,7 @@ static int map_width(t_maplist **head)
 	return (width);
 }
 
-static void fill_map(t_parse *parse, t_maplist **head)
+static void	fill_map(t_parse *parse, t_maplist **head)
 {
 	t_maplist	*temp;
 	int			i;
@@ -40,7 +40,7 @@ static void fill_map(t_parse *parse, t_maplist **head)
 	temp = *head;
 	i = 0;
 	printf("widht = %d\n", parse->map_width);
-	while(i < parse->map_height)
+	while (i < parse->map_height)
 	{
 		len = ft_strlen(temp->line);
 		parse->map[i] = (char *)malloc((parse->map_width + 1) * sizeof(char));
@@ -56,7 +56,15 @@ static void fill_map(t_parse *parse, t_maplist **head)
 	}
 }
 
-void create_map(t_parse *parse, t_maplist **head)
+static void	check_extrem_lines(t_parse *parse)
+{
+	if (ft_strchr(parse->map[0], '0'))
+		ft_exit("Error char '0' ina limit");
+	if (ft_strchr(parse->map[parse->map_height - 1], '0'))
+		ft_exit("Error char '0' ina limit");
+}
+
+void	create_map(t_parse *parse, t_maplist **head)
 {
 	int			height;
 
@@ -68,4 +76,5 @@ void create_map(t_parse *parse, t_maplist **head)
 	parse->map_height = height;
 	parse->map_width = map_width(head);
 	fill_map(parse, head);
+	check_extrem_lines(parse);
 }
