@@ -3,24 +3,24 @@
 static void	check_error_one(int y, int x, char **map)
 {
 	if (map[y][x] != '1')
-		printf("Error 1 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+		ft_exit("Error: Bad map");
 	else
 	{
 		if (map[y][x + 1] == '0')
-			printf("Error 2 wall open in vertilcal parse in x = %d y = %d\n", x + 1, y);
+		ft_exit("Error: Bad map");
 	}
 }
 
 static void	check_error_two(int y, int x, char **map)
 {
 	if (map[y][x + 1] && (map[y - 1][x + 1] != '1' && map[y - 1][x + 1] != ' '))
-		printf("Error 3 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+		ft_exit("Error: Bad map");
 	if (map[y + 1] && (map[y + 1][x] == '0'))
-		printf("Error 4 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+		ft_exit("Error: Bad map");
 	if (map[y - 1] && map[y - 1][x] == '0')
-		printf("Error 5 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+		ft_exit("Error: Bad map");
 	if ((x > 0 && map[y + 1]) && (map[y + 1][x - 1] == '0'))
-		printf("Error 6 wall open in vertilcal parse in x = %d y = %d    map[x][y] = %c\n", x, y, map[y][x]);
+		ft_exit("Error: Bad map");
 }
 
 static void	loop_parse_map(t_parse *parse, char **map, int x, int y)

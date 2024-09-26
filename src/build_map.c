@@ -39,7 +39,6 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 
 	temp = *head;
 	i = 0;
-	printf("widht = %d\n", parse->map_width);
 	while (i < parse->map_height)
 	{
 		len = ft_strlen(temp->line);
@@ -50,7 +49,6 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 		ft_memset(parse->map[i], ' ', parse->map_width);
 		if (ft_memcpy(parse->map[i], temp->line, len) == 0)
 			ft_exit("Error in ft_strlcpy");
-		printf("line = %s\n", parse->map[i]);
 		temp = temp->next;
 		i++;
 	}
