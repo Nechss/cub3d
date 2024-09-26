@@ -44,6 +44,6 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	init_struct(parse);
 	create_map(parse, head);
 	vetical_parse_map(parse);
-	print_parse(parse);
-	exit(0);
+	// print_parse(parse);
+	// exit(0);
 }

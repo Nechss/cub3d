@@ -5,7 +5,7 @@ static void	parse_texture(char *line, t_parse *parse)
 	char	*temp;
 
 	temp = trim_spaces(line + 2);
-	printf("tex_line = %s\n", temp);
+//	printf("tex_line = %s\n", temp);
 	if (line[0] == 'N' && line[1] == 'O')
 		parse->tex_n = ft_strdup(temp);
 	else if (line[0] == 'S' && line[1] == 'O')

@@ -11,119 +11,19 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
- 
-// void	can_move(float new_x, float new_y, t_cub *cub)
-// {
-// 	int	map_x;
-// 	int	map_y;
-
-// 	map_x = (int)(new_x);
-// 	map_y = (int)(new_y);
-// 	if (map_x >= 0 && map_x < cub->map_width &&
-// 		map_y >= 0 && map_y < cub->map_width &&
-// 		cub->map[(int)(new_y + 0.3)][(int)(new_x + 0.3)] != '1' &&
-// 		cub->map[(int)(new_y + 0.3)][(int)(new_x - 0.3)] != '1' &&
-// 		cub->map[(int)(new_y - 0.3)][(int)(new_x + 0.3)] != '1' &&
-// 		cub->map[(int)(new_y - 0.3)][(int)(new_x - 0.3)] != '1')
-// 		{
-// 		cub->player.x = new_x;
-// 		cub->player.y = new_y;
-// 		}
-// }
-
-// void	can_move(float new_x, float new_y, t_cub *cub)
-// {
-// 	if ((int)(new_x) >= 0 && (int)(new_x) < cub->map_width &&
-// 		(int)(new_y) >= 0 && (int)(new_y) < cub->map_width &&
-// 		cub->map[(int)(new_y + 0.3)][(int)(new_x + 0.3)] != '1' &&
-// 		cub->map[(int)(new_y + 0.3)][(int)(new_x - 0.3)] != '1' &&
-// 		cub->map[(int)(new_y - 0.3)][(int)(new_x + 0.3)] != '1' &&
-// 		cub->map[(int)(new_y - 0.3)][(int)(new_x - 0.3)] != '1')
-// 		{
-// 		cub->player.x = new_x;
-// 		cub->player.y = new_y;
-// 		}
-// }
-
-
-// void	can_move(float new_x, float new_y, t_cub *cub)
-// {
-// 	int	map_x;
-// 	int	map_y;
-// 	int	current_map_x;
-// 	int	current_map_y;
-
-// 	map_x = (int)(new_x);
-// 	map_y = (int)(new_y);
-// 	current_map_x = (int)(cub->player.x);
-// 	current_map_y = (int)(cub->player.y);
-// 	if (map_x >= 0 && map_x < cub->map_width
-// 		&& cub->map[(int)(new_y + 0.3)][(int)(new_x + 0.3)] != '1' &&
-// 			cub->map[(int)(new_y - 0.3)][(int)(new_x - 0.3)] != '1')
-// 	{
-// 		cub->player.x = new_x;
-// 		cub->player.y = new_y;
-// 	}
-// 	printf("new_x: %f\n", new_x);
-// 	printf("new_y: %f\n", new_y);
-// }
 
 void	can_move(float new_x, float new_y, t_cub *cub)
 {
-	int	map_x;
-	int	map_y;
-	int	current_map_x;
-	int	current_map_y;
-
-	map_x = (int)(new_x);
-	map_y = (int)(new_y);
-	current_map_x = (int)(cub->player.x);
-	current_map_y = (int)(cub->player.y);
-	if (map_x >= 0 && map_x < cub->map_width
-		&& cub->map[(int)(cub->player.y + 0.5)][(int)(new_x + 0.15)] != '1' &&
-			cub->map[(int)(cub->player.y + 0.5)][(int)(new_x - 0.15)] != '1')
+	if ((int)(new_x) >= 0 && (int)(new_x) < cub->map_width &&
+		(int)(new_y) >= 0 && (int)(new_y) < cub->map_width &&
+		cub->map[(int)(new_y + 0.15)][(int)(new_x + 0.15)] != '1' &&
+		cub->map[(int)(new_y + 0.15)][(int)(new_x - 0.15)] != '1' &&
+		cub->map[(int)(new_y - 0.15)][(int)(new_x + 0.15)] != '1' &&
+		cub->map[(int)(new_y - 0.15)][(int)(new_x - 0.15)] != '1')
+		{
 		cub->player.x = new_x;
-	if (map_y >= 0 && map_y < cub->map_height
-		&& cub->map[(int)(new_y + 0.15)][current_map_x] != '1' &&
-			cub->map[(int)(new_y - 0.15)][current_map_x] != '1')
 		cub->player.y = new_y;
-
-
-// 	if (map_x >= 0 && map_x < cub->map_width
-// 		&& cub->map[(int)(cub->player.y - 0.5)][(int)(new_x + 0.15)] != '1' &&
-// 			cub->map[(int)(cub->player.y - 0.5)][(int)(new_x - 0.15)] != '1')
-// 		cub->player.x = new_x;
-// 	if (map_y >= 0 && map_y < cub->map_height
-// 		&& cub->map[(int)(new_y + 0.15)][current_map_x] != '1' &&
-// 			cub->map[(int)(new_y - 0.15)][current_map_x] != '1')
-// 		cub->player.y = new_y;
-
-
-// 	if (map_x >= 0 && map_x < cub->map_width
-// 		&& cub->map[(int)(cub->player.y)][(int)(new_x + 0.15)] != '1' &&
-// 			cub->map[(int)(cub->player.y)][(int)(new_x - 0.15)] != '1')
-// 		cub->player.x = new_x;
-// 	if (map_y >= 0 && map_y < cub->map_height
-// 		&& cub->map[(int)(new_y + 0.15)][(int)(cub->player.x + 0.5)] != '1' &&
-// 			cub->map[(int)(new_y - 0.15)][(int)(cub->player.x + 0.5)] != '1')
-// 		cub->player.y = new_y;
-
-// 	if (map_x >= 0 && map_x < cub->map_width
-// 		&& cub->map[(int)(cub->player.y)][(int)(new_x + 0.15)] != '1' &&
-// 			cub->map[(int)(cub->player.y)][(int)(new_x - 0.15)] != '1')
-// 		cub->player.x = new_x;
-// 	if (map_y >= 0 && map_y < cub->map_height
-// 		&& cub->map[(int)(new_y + 0.15)][(int)(cub->player.x - 0.5)] != '1' &&
-// 			cub->map[(int)(new_y - 0.15)][(int)(cub->player.x - 0.5)] != '1')
-// 		cub->player.y = new_y;
-}
-
-float	round_to_decimals(float value, int decimals)
-{
-	float	factor;
-
-	factor = pow(10, decimals);
-	return (round(value * factor) / factor);
+		}
 }
 
 void	move_event(t_cub *cub, float new_x, float new_y)
