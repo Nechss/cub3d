@@ -1,7 +1,7 @@
 # Variables
 NAME        = cub3D
 CC          = gcc
-CFLAGS      = -O3 -Wall -Wextra #-fsanitize=address #-Werror
+CFLAGS      = -O3 -Wall -Wextra -fsanitize=address -Werror
 INCLUDE     = -I./include -I./include/libft/include
 RM          = rm -f
 
@@ -19,6 +19,15 @@ SRC         = cub3D.c         \
 			events_move.c   \
 			render_map.c    \
 			render_scene.c  \
+			parsing.c		\
+			parse_line.c	\
+			parse_utils.c	\
+			general_utils.c	\
+			parse_line_map.c\
+			build_map.c\
+			build_list.c\
+			init_structs.c\
+			vertical_parse.c\
 
 
 OBJ         = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

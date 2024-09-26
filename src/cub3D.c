@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -24,7 +25,7 @@ void	draw_pixel(mlx_image_t *img, int x, int y, int color)
 		*pixel = (color & 0xFFFFFF) | 0xFF000000;
 	}
 }
-
+		
 void	render(t_cub *cub)
 {
 	render_scene(cub);
@@ -55,16 +56,16 @@ void	init_map(t_cub *cub)
 	cub->player.x = 4;
 	cub->player.y = 5;
 	cub->player.angle = 0;
-	cub->color_c = 0x00FF0000;
-	cub->color_f = 0x000000FF;
+	cub->color_c = 0xFF00aa;
+	cub->color_f = 0xaaaaaa;
 }
 
 void	get_textures(t_cub *cub)
 {
-	cub->tex_n = mlx_load_png("./textures/planks128.png");
-	cub->tex_s = mlx_load_png("./textures/bricks.png");
-	cub->tex_e = mlx_load_png("./textures/wall512.png");
-	cub->tex_w = mlx_load_png("./textures/wall64.png");
+	cub->tex_n = mlx_load_png("./textures/rockwall.png");
+	cub->tex_s = mlx_load_png("./textures/rockwall.png");
+	cub->tex_e = mlx_load_png("./textures/rockwall.png");
+	cub->tex_w = mlx_load_png("./textures/rockwall_red.png");
 	if (!cub->tex_n || !cub->tex_s || !cub->tex_e || !cub->tex_w)
 	{
 		printf("Failed to load texture\n");
@@ -125,12 +126,19 @@ void set_win(t_cub *f)
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
+	t_parse parse;
+	t_flags flags;
+	t_maplist *tok_list;
 
+	parse.flags = &flags;
+	tok_list = NULL;
 	if (argc != 2)
 	{
-		printf("Usage: ./cub3D <map.cub>\n");
+		parse.flags->close_wall = 4;
+		printf("Usage: ./cub3D <map.cub>\nflag wall == %d\n", flags.close_wall);
 		exit(EXIT_FAILURE);
 	}
+	parsing_doc(argv[1], &parse, &tok_list); 
 	set_win(&cub);
 	get_map(&cub, argv[1]);
 	get_textures(&cub);

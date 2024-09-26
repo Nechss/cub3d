@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/02/18 19:39:54 by gperez-b         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:35:40 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,33 @@ typedef struct s_cub
 	int	ignore;
 }	t_cub;
 
+typedef struct s_flags
+{
+	char	player;
+	int		close_wall;
+	int		empty_line;
+	int		finish_map;
+}	t_flags;
+
+typedef struct s_parse
+{
+	char			*tex_n;
+	char			*tex_s;
+	char			*tex_e;
+	char			*tex_w;
+	int				color_c[3];
+	int				color_f[3];
+	int				map_width;
+	int				map_height;
+	char			**map;
+	t_flags			*flags;
+}	t_parse;
+
+typedef struct s_maplist
+{
+    char			*line;
+    struct s_maplist *next;
+}	t_maplist;
 
 //------------Init----------------//
 
@@ -119,6 +146,24 @@ void	rotate_event(t_cub *cub);
 
 void	destroy(void* param);
 void	free_map(char **map);
+void	ft_exit(char *str);
+void	free_words(char **rslt);
+void	free_parse(t_parse *parse);
 
+//-------------Parsing---------------//
+
+void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **tok_list);
+int		parse_line_map(char *str, t_parse *parse);
+void	convert_num_color(char **colors, int color_x[3]);
+char	*trim_spaces(char *str);
+int		count_rows(char **argv);
+void	create_map(t_parse *parse, t_maplist **head);
+void	check_line(char *line, t_parse *parse, t_maplist **head);
+void	add_node(char *line, t_maplist **head);
+void	init_struct(t_parse *parse);
+void	vetical_parse_map(t_parse *parse);
+
+//-------------TEMPORAL---------------//
+void	print_parse(t_parse *parse);
 
 #endif
