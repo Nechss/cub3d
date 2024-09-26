@@ -44,11 +44,12 @@ void	free_map(char **map)
 	}
 	free(map);
 }
-void	set_game(t_cub *cub, t_parse *parse, char *path)
+void	set_game(t_cub *cub, t_parse *parse)
 {
 	cub->map = parse->map;
 	cub->map_height = parse->map_height;
 	cub->map_width = parse->map_width;
+	print_parse(parse);
 	cub->color_f = parse->color_f[0] << 16 | parse->color_f[1] << 8 | parse->color_f[2];
 	cub->color_c = parse->color_c[0] << 16 | parse->color_c[1] << 8 | parse->color_c[2];
 	cub->fov_angle = 5 * M_PI / 12;
@@ -173,7 +174,7 @@ int	main(int argc, char **argv)
 	}
 	set_win(&cub);
 	parsing_doc(argv[1], &parse, &tok_list); 
-	set_game(&cub, &parse, argv[1]);
+	set_game(&cub, &parse);
 	render(&cub);
 	events(&cub);
 	mlx_loop(cub.mlx);

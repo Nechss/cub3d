@@ -2,7 +2,6 @@
 
 void	init_struct(t_parse *parse)
 {
-	parse = (t_parse *)malloc(sizeof(t_parse));
 	parse->tex_n = NULL;
 	parse->tex_s = NULL;
 	parse->tex_e = NULL;

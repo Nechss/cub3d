@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/24 18:10:50 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:52:09 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 
 void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 {
-	get_line(parse, map_doc, head);
 	init_struct(parse);
+	get_line(parse, map_doc, head);
 	create_map(parse, head);
 	vetical_parse_map(parse);
-	// print_parse(parse);
-	// exit(0);
+//	print_parse(parse);
+//	exit(0);
 }
