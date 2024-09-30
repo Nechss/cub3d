@@ -1,7 +1,7 @@
 NO ./textures/bricks.png
 WE           ./textures/planks.png 
 EA    ./textures/wall512.png          
-SO./textures/planks128.png                         
+SO./textures/scifiwall_1.png                         
 
 F 220,100,0             
 C     119,255,51

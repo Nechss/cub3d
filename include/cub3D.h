@@ -26,7 +26,7 @@
 # define HEIGHT	768
 # define MOVE_SPEED 0.08
 # define ROTATE_SPEED 0.05
-# define RAY_STEP 0.005
+# define RAY_STEP 0.00005
 
 # define BLACK  0x00000000
 # define BLUE   0x00FF0000
@@ -65,6 +65,13 @@ typedef struct s_ray
 	float	length;
 	char	direction;
 	int		wall_height;
+	int		hit_x;
+	float	dir_x;
+	float	dir_y;
+	float	side_x;
+	float	side_y;
+	float	delta_x;
+	float	delta_y;
 } t_ray;
 
 typedef struct s_coor
