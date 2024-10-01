@@ -65,9 +65,11 @@ typedef struct s_ray
 	float	length;
 	char	direction;
 	int		wall_height;
+	int		hit;
 	int		hit_x;
 	float	dir_x;
 	float	dir_y;
+	int		side;
 	float	side_x;
 	float	side_y;
 	float	delta_x;
@@ -140,7 +142,7 @@ void	draw_pixel(mlx_image_t *img, int x, int y, int color);
 void	render(t_cub *cub);
 void	render_map(t_cub *cub);
 void	render_scene(t_cub *cub);
-
+void	cast_ray(t_cub *cub, char *wall_hit_direction);
 
 //------------Events----------------//
 
