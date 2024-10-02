@@ -1,7 +1,7 @@
 # Variables
 NAME        = cub3D
 CC          = gcc
-CFLAGS      = -O3 -Wall -Wextra #-Werror -fsanitize=address
+CFLAGS      = -O3 -Wall -Wextra -Werror #-fsanitize=address
 INCLUDE     = -I./include -I./include/libft/include
 RM          = rm -f
 
@@ -15,6 +15,7 @@ BUILD_DIR = $(MLX42_DIR)/build
 MLX      = $(BUILD_DIR)/libmlx42.a
 
 SRC         = cub3D.c         \
+			init_game.c\
 			events.c        \
 			events_move.c   \
 			render_map.c    \

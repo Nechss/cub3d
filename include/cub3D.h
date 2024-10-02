@@ -133,7 +133,9 @@ typedef struct s_maplist
 
 //------------Init----------------//
 
+void	set_textures(t_parse *parse, t_cub *cub);
 void	set_win(t_cub *cub);
+void	set_game(t_cub *cub, t_parse *parse);
 
 //------------Render----------------//
 

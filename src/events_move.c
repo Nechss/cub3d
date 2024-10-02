@@ -20,10 +20,10 @@ void	can_move(float new_x, float new_y, t_cub *cub)
 		cub->map[(int)(new_y + 0.15)][(int)(new_x - 0.15)] != '1' &&
 		cub->map[(int)(new_y - 0.15)][(int)(new_x + 0.15)] != '1' &&
 		cub->map[(int)(new_y - 0.15)][(int)(new_x - 0.15)] != '1')
-		{
+	{
 		cub->player.x = new_x;
 		cub->player.y = new_y;
-		}
+	}
 }
 
 void	move_event(t_cub *cub, float new_x, float new_y)

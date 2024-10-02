@@ -17,9 +17,9 @@ void	wall_hit(t_cub *cub, int step_x, int step_y, char *wall_hit_dir)
 	if (cub->ray->side == 0)
 	{
 		if (step_x < 0)
-			*wall_hit_dir = 'W';
-		else
 			*wall_hit_dir = 'E';
+		else
+			*wall_hit_dir = 'W';
 	}
 	else
 	{

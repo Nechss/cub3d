@@ -93,51 +93,20 @@ void	render_scene(t_cub *cub)
 {
 	int		i;
 	int		num_rays;
-	float	angle_step;
+	float	screen_x;
 	t_ray	ray;
 
-	i = -1;
 	num_rays = cub->img->width;
-	angle_step = cub->fov_angle / num_rays;
 	cub->ray = &ray;
 	render_floor_ceiling(cub);
-	while (++i < num_rays)
+	i = -1;
+	while (i++ < num_rays)
 	{
-		ray.angle = cub->player.angle - (cub->fov_angle / 2) + i * angle_step;
+		screen_x = (2.0f * i / num_rays) - 1.0f;
+		ray.angle = cub->player.angle
+			+ atan(screen_x * tan(cub->fov_angle / 2.0f));
 		cast_ray(cub, &ray.direction);
 		render_wall(cub, i, -1);
 	}
 	cub->ray = NULL;
 }
-
-// void	render_scene(t_cub *cub)
-// {
-// 	int		i;
-// 	int		num_rays;
-// 	float	angle_step;
-// 	t_ray	ray;
-// 	t_ray	tmp;
-// 	t_ray	tmp2;
-
-// 	i = 0;
-// 	num_rays = cub->img->width;
-// 	angle_step = cub->fov_angle / num_rays;
-// 	cub->ray = &ray;
-// 	render_floor_ceiling(cub);
-// 	while (i < num_rays)
-// 	{
-// 		ray.angle = cub->player.angle - (cub->fov_angle / 2) + i * angle_step;
-// 		cast_ray(cub, &ray.direction);
-// 		render_wall(cub, i, -1);
-// 		if (tmp.length)
-// 		{
-// 			tmp2 = ray;
-// 			ray.angle = (ray.angle + tmp.angle) / 2;
-// 			ray.length = (ray.length + tmp.length) / 2;
-// 			render_wall(cub, i - 1, -1);
-// 			ray = tmp2;
-// 		}
-// 		tmp = ray;
-// 		i += 2;
-// 	}
-// }
