@@ -41,10 +41,16 @@ static void	parse_color(char *line, t_parse *parse)
 
 static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 {
-	int	last_char;
+	int		last_char;
+	char	*new_line;
 
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w)
 		ft_exit("Some error map ocurred / Check the .cub file");
+	if (strcmp(line, "\t"))
+	{
+		new_line = parse_tabs(line);
+		line = new_line;
+	}
 	last_char = parse_line_map(line, parse);
 	if (last_char >= 0 && parse->flags->finish_map != 1)
 	{
@@ -64,7 +70,7 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 		parse_texture(line, parse);
 	else if (line[0] == 'F' || line[0] == 'C')
 		parse_color(line, parse);
-	else if (line[0] == '1' || line[0] == ' ')
+	else if (line[0] == '1' || line[0] == ' ' || line[0] == '\t')
 		parse_map(line, parse, head);
 	else
 		ft_exit("Some error map ocurred / Check the .cub file");

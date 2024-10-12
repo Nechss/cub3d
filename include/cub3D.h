@@ -121,6 +121,8 @@ typedef struct s_parse
 	int				color_f[3];
 	int				map_width;
 	int				map_height;
+	char			player;
+	int				position[2];
 	char			**map;
 	t_flags			*flags;
 }	t_parse;
@@ -173,6 +175,8 @@ void	check_line(char *line, t_parse *parse, t_maplist **head);
 void	add_node(char *line, t_maplist **head);
 void	init_struct(t_parse *parse);
 void	vetical_parse_map(t_parse *parse);
+void	parse_player(t_parse *parse);
+char	*parse_tabs(char *line);
 
 //-------------TEMPORAL---------------//
 void	print_parse(t_parse *parse);

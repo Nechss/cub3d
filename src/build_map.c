@@ -58,9 +58,9 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 static void	check_extrem_lines(t_parse *parse)
 {
 	if (ft_strchr(parse->map[0], '0'))
-		ft_exit("Error char '0' ina limit");
+		ft_exit("Error char '0' limit");
 	if (ft_strchr(parse->map[parse->map_height - 1], '0'))
-		ft_exit("Error char '0' ina limit");
+		ft_exit("Error char '0' limit");
 }
 
 void	create_map(t_parse *parse, t_maplist **head)

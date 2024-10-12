@@ -15,4 +15,5 @@ void	init_struct(t_parse *parse)
 	parse->map_width = 0;
 	parse->map_height = 0;
 	parse->map = NULL;
+	parse->player = '\0';
 }

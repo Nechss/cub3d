@@ -30,6 +30,8 @@ SRC         = cub3D.c         \
 			build_list.c\
 			init_structs.c\
 			vertical_parse.c\
+			parse_player.c\
+			parse_tabs.c\
 
 
 

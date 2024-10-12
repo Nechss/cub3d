@@ -2,12 +2,12 @@
 
 static int	check_first_char(char *str, int i)
 {
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	if (!str[i])
 		return (-1);
 	if (str[i] && str[i] != '1')
-		ft_exit("Incorrect map at begining wall");
+		ft_exit("Error: Incorrect map at begining wall");
 	return (i);
 }
 
@@ -19,7 +19,7 @@ static int	check_last_char(char *str, int i)
 	while (str[i] && str[i] == ' ')
 		i--;
 	if (str[i] != '1')
-		ft_exit("Incorrect map at finish wall");
+		ft_exit("Error: Incorrect map at finish wall");
 	return (i);
 }
 
@@ -27,14 +27,14 @@ static void	check_char_type(char *str, int i)
 {
 	if (str[i] != '0' && str[i] != '1' && str[i] != 'N'\
 	&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W'\
-	&& str[i] != ' ')
-		ft_exit("Incorrect map: bad caracter");
+	&& str[i] != ' ')	
+		ft_exit("Error: bad caracter");
 }
 
 static int	check_wall(char *str, t_parse *parse, int i)
 {
 	if (parse->flags->close_wall == 0 && str[i] != '1')
-		ft_exit("Incorrect map: bad wall");
+		ft_exit("Error: Incorrect map");
 	else if (str[i] == '1')
 	{
 		parse->flags->close_wall = 1;
@@ -44,7 +44,7 @@ static int	check_wall(char *str, t_parse *parse, int i)
 	if (str[i] && str[i] == ' ')
 	{
 		if (str[i + 1] != '1')
-			ft_exit("Incorrect map: bad wall en el hueco");
+			ft_exit("Error: Incorrect map");
 		parse->flags->close_wall = 0;
 		while (str[i] && str[i] == ' ')
 			i--;

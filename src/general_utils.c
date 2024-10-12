@@ -44,4 +44,5 @@ void	print_parse(t_parse *parse)
 		printf("-> %s\n", parse->map[i]);
 		i++;
 	}
+	printf ("player = %c\npossition = [%d][%d]\n", parse->player, parse->position[0], parse->position[1]); 
 }

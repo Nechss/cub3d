@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse_tabs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,51 @@
 
 #include "cub3D.h"
 
-static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
+void	replace_tabs(char *line, char *new_line)
 {
-	char	*line;
-	char	*clean_line;
-	int		fd;
+	int	i;
+	int	j;
 
-	fd = (open(map_doc, O_RDONLY));
-	if (fd == -1)
-		ft_exit("Failed to read document .cub");
-	while (1)
+	i = 0;
+	j = 0;
+	while(line[i])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (!strcmp(line, "\n"))
+		if (line[i] == '\t')
 		{
-			free(line);
-			continue ;
+			new_line[j++] = ' ';
+			new_line[j++] = ' ';
+			new_line[j++] = ' ';
+			new_line[j++] = ' ';
 		}
-		clean_line = ft_strtrim(line, "\n");
-		check_line(clean_line, parse, head);
-		free(line);
-		free(clean_line);
+		else
+			new_line[j++] = line[i];
+		i++;
 	}
+	new_line[j] = '\0';
 }
 
-void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
+char	*parse_tabs(char *line)
 {
-	init_struct(parse);
-	get_line(parse, map_doc, head);
-	create_map(parse, head);
-	vetical_parse_map(parse);
-	parse_player(parse);
-	print_parse(parse);
-	exit(0);
+	int		tabs_count;
+	int		i;
+	char	*new_line;
+	int		new_len;
+
+	tabs_count = 0;
+	i = 0;
+
+	printf("line     = %s|\n", line);
+	while(line[i])
+	{
+		if (line[i] == '\t')
+			tabs_count++;
+		i++;
+	}
+	new_len = i + tabs_count * 3;
+	new_line = (char *)malloc(new_len + 1);
+	if (!new_line)
+		ft_exit("Error de Malloc");
+	replace_tabs(line, new_line);
+	printf("new line = %s|\n", new_line);
+	return(new_line);
 }
