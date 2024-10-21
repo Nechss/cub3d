@@ -103,6 +103,17 @@ typedef struct s_cub
 	int	ignore;
 }	t_cub;
 
+typedef struct s_line
+{
+	int	x0;
+	int	y0;
+	float	angle;
+	float	dx;
+	float	dy;
+	int		ray_x;
+	int		ray_y;
+} t_line;
+
 typedef struct s_flags
 {
 	char	player;

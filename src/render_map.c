@@ -12,57 +12,54 @@
 
 #include "cub3D.h"
 
-void draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1)
+void	draw_line(mlx_image_t *img, t_line *line, int err, int e2)
 {
-	int dx;
-    int dy;
-	int err;
-	int e2;
-
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	err = dx - dy;
+	err = line->dx - line->dy;
 	while (1)
 	{
-		draw_pixel(img, x0, y0, RED);
-		if (x0 == x1 && y0 == y1)
-			return;
+		draw_pixel(img, line->x0, line->y0, RED);
+		if (line->x0 == line->ray_x && line->y0 == line->ray_y)
+			return ;
 		e2 = err;
-		if (e2 > -dy)
+		if (e2 > -line->dy)
 		{
-			err -= dy;
-			if (x0 < x1)
-				x0++;
+			err -= line->dy;
+			if (line->x0 < line->ray_x)
+				line->x0++;
 			else
-				x0--;
- 		}
-		if (e2 < dx)
+				line->x0--;
+		}
+		if (e2 < line->dx)
 		{
-			err += dx;
-			if (y0 < y1)
-				y0++;
+			err += line->dx;
+			if (line->y0 < line->ray_y)
+				line->y0++;
 			else
-				y0--;
+				line->y0--;
 		}
 	}
 }
 
-void	draw_fov(t_cub *cub, float ray_x, float ray_y, float ray_angle)
+void	draw_fov(t_cub *cub, float ray_angle)
 {
 	int		i;
 	int		num_rays;
 	float	angle_step;
+	t_line	line;
 
-	i = -1;
-	num_rays = 100;
+	num_rays = 128;
 	angle_step = cub->fov_angle / num_rays;
+	i = -1;
 	while (++i < num_rays)
 	{
 		ray_angle = cub->player.angle - (cub->fov_angle / 2) + i * angle_step;
-		ray_x = (cub->player.x * cub->tile_size) + cos(ray_angle) * 60;
-		ray_y = (cub->player.y * cub->tile_size) + sin(ray_angle) * 60;
-		draw_line(cub->img, cub->player.x * cub->tile_size,
-			cub->player.y * cub->tile_size, ray_x, ray_y);
+		line.x0 = cub->player.x * cub->tile_size;
+		line.y0 = cub->player.y * cub->tile_size;
+		line.ray_x = line.x0 + cos(ray_angle) * 60;
+		line.ray_y = line.y0 + sin(ray_angle) * 60;
+		line.dx = abs(line.ray_x - line.x0);
+		line.dy = abs(line.ray_y - line.y0);
+		draw_line(cub->img, &line, 0, 0);
 	}
 }
 
@@ -132,5 +129,5 @@ void	render_map(t_cub *cub)
 		y++;
 	}
 	draw_player(cub->img, cub->player.x * ts, cub->player.y * ts, BLUE);
-	draw_fov(cub, cub->player.x * ts, cub->player.y * ts, RED);
+	draw_fov(cub, 0);
 }

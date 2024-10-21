@@ -65,7 +65,6 @@ void	set_textures(t_parse *parse, t_cub *cub)
 	if (!cub->tex_n || !cub->tex_s || !cub->tex_e || !cub->tex_w)
 	{
 		printf("Failed to load texture\n");
-	//	free_map(cub->map);
 		exit(EXIT_FAILURE);
 	}
 }
