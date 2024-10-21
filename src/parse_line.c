@@ -3,7 +3,6 @@
 static void	parse_texture(char *line, t_parse *parse)
 {
 	char	*temp;
-
 	temp = trim_spaces(line + 2);
 	if (line[0] == 'N' && line[1] == 'O')
 		parse->tex_n = ft_strdup(temp);
@@ -44,8 +43,10 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 	int		last_char;
 	char	*new_line;
 
+	printf("aqui line = %s\n", line);
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w)
-		ft_exit("Some error map ocurred / Check the .cub file");
+		ft_exit("Error texture map ocurred / Check the .cub file");
+	
 	if (strcmp(line, "\t"))
 	{
 		new_line = parse_tabs(line);
@@ -61,7 +62,7 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 	else if (parse->flags->finish_map != 1)
 		parse->flags->finish_map = 1;
 	else
-		ft_exit("EMpty line detected\n");
+		ft_exit("Empty line detected\n");
 }
 
 void	check_line(char *line, t_parse *parse, t_maplist **head)
@@ -71,7 +72,10 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 	else if (line[0] == 'F' || line[0] == 'C')
 		parse_color(line, parse);
 	else if (line[0] == '1' || line[0] == ' ' || line[0] == '\t')
+	{
+		parse->flags->init_map = 1;
 		parse_map(line, parse, head);
+	}
 	else
 		ft_exit("Some error map ocurred / Check the .cub file");
 }

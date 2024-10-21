@@ -25,20 +25,16 @@ void	set_game(t_cub *cub, t_parse *p)
 		cub->tile_size = (HEIGHT / 3) / cub->map_height;
 	else
 		cub->tile_size = (WIDTH / 3) / cub->map_width;
-	// cub->player.x = p->player_x;
-	// cub->player.y = p->player_y;
-	// if (p->flags->player == 'N')
-	// 	cub->player.angle = 0;
-	// else if (p->flags->player == 'S')
-	// 	cub->player.angle = M_PI;
-	// else if (p->flags->player == 'W')
-	// 	cub->player.angle = 3 * M_PI_2;
-	// else if (p->flags->player == 'E')
-	
-	/// temp
-	cub->player.x = 8;
-	cub->player.y = 8;
-	cub->player.angle = 0;
+	cub->player.x = p->position[1];
+	cub->player.y = p->position[0];
+	if (p->player == 'E')
+		cub->player.angle = 0;
+	else if (p->player == 'W')
+		cub->player.angle = M_PI;
+	else if (p->player == 'N')
+		cub->player.angle = 3 * M_PI_2;
+	else if (p->player == 'S')
+		cub->player.angle = M_PI_2;
 }
 
 void	set_win(t_cub *f)

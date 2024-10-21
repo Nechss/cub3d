@@ -44,8 +44,6 @@ char	*parse_tabs(char *line)
 
 	tabs_count = 0;
 	i = 0;
-
-	printf("line     = %s|\n", line);
 	while(line[i])
 	{
 		if (line[i] == '\t')
@@ -57,6 +55,5 @@ char	*parse_tabs(char *line)
 	if (!new_line)
 		ft_exit("Error de Malloc");
 	replace_tabs(line, new_line);
-	printf("new line = %s|\n", new_line);
 	return(new_line);
 }

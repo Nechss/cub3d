@@ -59,9 +59,9 @@ mlx_texture_t	*which_texture(t_cub *cub)
 		texture = cub->tex_n;
 	if (cub->ray->direction == 'S')
 		texture = cub->tex_s;
-	if (cub->ray->direction == 'E')
-		texture = cub->tex_e;
 	if (cub->ray->direction == 'W')
+		texture = cub->tex_e;
+	if (cub->ray->direction == 'E')
 		texture = cub->tex_w;
 	return (texture);
 }

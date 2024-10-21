@@ -6,7 +6,7 @@
 /*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/26 18:52:09 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:27:23 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		
 		if (!strcmp(line, "\n"))
 		{
-			free(line);
+			line[0]= 'Z';
+			if (parse->flags->init_map == 1)
+				break ;	
 			continue ;
 		}
 		clean_line = ft_strtrim(line, "\n");
@@ -45,6 +48,6 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	create_map(parse, head);
 	vetical_parse_map(parse);
 	parse_player(parse);
-	print_parse(parse);
-	exit(0);
+//	print_parse(parse);
+//	exit(0);
 }

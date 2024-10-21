@@ -109,6 +109,7 @@ typedef struct s_flags
 	int		close_wall;
 	int		empty_line;
 	int		finish_map;
+	int		init_map;
 }	t_flags;
 
 typedef struct s_parse
