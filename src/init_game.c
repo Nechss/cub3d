@@ -25,8 +25,8 @@ void	set_game(t_cub *cub, t_parse *p)
 		cub->tile_size = (HEIGHT / 3) / cub->map_height;
 	else
 		cub->tile_size = (WIDTH / 3) / cub->map_width;
-	cub->player.x = p->position[1];
-	cub->player.y = p->position[0];
+	cub->player.x = p->position[1] + 0.5;
+	cub->player.y = p->position[0] + 0.5;
 	if (p->player == 'E')
 		cub->player.angle = 0;
 	else if (p->player == 'W')
