@@ -22,11 +22,10 @@
 # include "./mlx/include/MLX42/MLX42.h"
 # include "libft.h"
 
-# define WIDTH	1024
-# define HEIGHT	768
+# define WIDTH	1280
+# define HEIGHT	960
 # define MOVE_SPEED 0.08
 # define ROTATE_SPEED 0.05
-# define RAY_STEP 0.00005
 
 # define BLACK  0x00000000
 # define BLUE   0x00FF0000
@@ -107,11 +106,11 @@ typedef struct s_line
 {
 	int	x0;
 	int	y0;
-	float	angle;
-	float	dx;
-	float	dy;
 	int		ray_x;
 	int		ray_y;
+	float	dx;
+	float	dy;
+	float	angle;
 } t_line;
 
 typedef struct s_flags

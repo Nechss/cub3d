@@ -15,7 +15,7 @@
 void	can_move(float new_x, float new_y, t_cub *cub)
 {
 	if ((int)(new_x) >= 0 && (int)(new_x) < cub->map_width &&
-		(int)(new_y) >= 0 && (int)(new_y) < cub->map_width &&
+		(int)(new_y) >= 0 && (int)(new_y) < cub->map_height &&
 		cub->map[(int)(new_y + 0.15)][(int)(new_x + 0.15)] != '1' &&
 		cub->map[(int)(new_y + 0.15)][(int)(new_x - 0.15)] != '1' &&
 		cub->map[(int)(new_y - 0.15)][(int)(new_x + 0.15)] != '1' &&
