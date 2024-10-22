@@ -43,7 +43,7 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 	int		last_char;
 	char	*new_line;
 
-	printf("aqui line = %s\n", line);
+	//printf("aqui line = %s\n", line);
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w)
 		ft_exit("Error texture map ocurred / Check the .cub file");
 	
@@ -60,7 +60,11 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 		add_node(line, head);
 	}
 	else if (parse->flags->finish_map != 1)
+	{
 		parse->flags->finish_map = 1;
+		printf("ENTRA\n");
+
+	}
 	else
 		ft_exit("Empty line detected\n");
 }
@@ -76,6 +80,6 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 		parse->flags->init_map = 1;
 		parse_map(line, parse, head);
 	}
-	else
-		ft_exit("Some error map ocurred / Check the .cub file");
+	else if (line[0] != '\t' && line[0] != ' ')
+		ft_exit("Error: map error format");
 }

@@ -29,10 +29,13 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 		
 		if (!strcmp(line, "\n"))
 		{
-			line[0]= 'Z';
-			if (parse->flags->init_map == 1)
-				break ;	
-			continue ;
+			if (parse->flags->init_map != 1)
+			{
+				free(line);
+				continue ;
+			}
+			else if(parse->flags->init_map == 1)
+				parse->flags->finish_map = 1;
 		}
 		clean_line = ft_strtrim(line, "\n");
 		check_line(clean_line, parse, head);
@@ -48,6 +51,6 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	create_map(parse, head);
 	vetical_parse_map(parse);
 	parse_player(parse);
-//	print_parse(parse);
+	print_parse(parse);
 //	exit(0);
 }
