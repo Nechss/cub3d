@@ -50,6 +50,7 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 		ft_memset(parse->map[i], ' ', parse->map_width);
 		if (ft_memcpy(parse->map[i], temp->line, len) == 0)
 			ft_exit("Error in ft_strlcpy");
+		printf("line map len = %d\n", parse->map[i][0]);
 		temp = temp->next;
 		i++;
 	}
