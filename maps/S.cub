@@ -1,14 +1,23 @@
-F 220,100,800
-C 225,30,56
+F       220,100,800
+C                225,30,56
 
-NO ./textures/bricks.png
+NO              ./textures/bricks.png
 WE ./textures/planks.png
 EA ./textures/wall512.png
 SO ./textures/planks128.png
 
 
- 1111
-10111
-11N011
-11011
-1111
+
+111111
+100011
+110011
+111111
+111111
+10N001
+100001
+111111
+
+   
+
+
+

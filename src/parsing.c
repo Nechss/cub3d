@@ -15,7 +15,7 @@
 static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 {
 	char	*line;
-	char	*clean_line;
+	//char	*clean_line;
 	int		fd;
 
 	fd = (open(map_doc, O_RDONLY));
@@ -37,10 +37,8 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 			else if(parse->flags->init_map == 1)
 				parse->flags->finish_map = 1;
 		}
-		clean_line = ft_strtrim(line, "\n");
-		check_line(clean_line, parse, head);
+		check_line(line, parse, head);
 		free(line);
-		free(clean_line);
 	}
 }
 

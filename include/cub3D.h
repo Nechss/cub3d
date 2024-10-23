@@ -142,6 +142,7 @@ typedef struct s_maplist
 {
     char			*line;
     struct s_maplist *next;
+    struct s_maplist *prev;
 }	t_maplist;
 
 //------------Init----------------//

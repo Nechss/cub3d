@@ -48,6 +48,7 @@ void	convert_num_color(char **colors, int color_x[3])
 	int	i;
 
 	i = 0;
+	colors[2][ft_strlen(colors[2]) - 1] = '\0';
 	while (colors[i])
 	{
 		check_if_is_num(colors[i]);

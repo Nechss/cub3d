@@ -1,5 +1,52 @@
 #include "cub3D.h"
 
+int	check_empty_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == ' ')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+void	clean_empty_nodes(t_maplist **head)
+{
+	t_maplist	*temp;
+	t_maplist	*prev;
+	int			flag_empty;
+
+	flag_empty = 0;
+	temp = *head;
+	while (temp->next != NULL)
+	{
+		if (check_empty_line(temp->line))
+		{
+			flag_empty = 1;
+		}
+		if (!check_empty_line(temp->line) && flag_empty)
+			ft_exit("Error: empty line in map");
+		temp = temp->next;
+	}
+	// temp = temp->prev;
+	while(check_empty_line(temp->line))
+	{
+		
+		printf("str = %s\n", temp->line);
+		prev = temp->prev;
+		// free(temp->line);
+		// free(temp);
+		temp = prev;
+		temp->next = NULL;
+	}
+	
+}
+
 static int	map_height(t_maplist **head)
 {
 	t_maplist	*temp;
@@ -43,14 +90,14 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 	while (i < parse->map_height)
 	{
 		len = ft_strlen(temp->line);
-		parse->map[i] = (char *)malloc((parse->map_width + 1) * sizeof(char));
+		parse->map[i] = (char *)malloc((parse->map_width +1) * sizeof(char));
 		if (!parse->map[i])
 			ft_exit("Error de malloc 2");
 		parse->map[i][parse->map_width] = '\0';
 		ft_memset(parse->map[i], ' ', parse->map_width);
 		if (ft_memcpy(parse->map[i], temp->line, len) == 0)
 			ft_exit("Error in ft_strlcpy");
-		printf("line map len = %d\n", parse->map[i][0]);
+		// printf("line map len = %d\n", parse->map[i][0]);
 		temp = temp->next;
 		i++;
 	}
@@ -75,6 +122,7 @@ void	create_map(t_parse *parse, t_maplist **head)
 	parse->map[height] = NULL;
 	parse->map_height = height;
 	parse->map_width = map_width(head);
+	clean_empty_nodes(head);
 	fill_map(parse, head);
 	check_extrem_lines(parse);
 }
