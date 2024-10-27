@@ -7,6 +7,7 @@ static t_maplist	*create_node(char *line)
 	new_node = (t_maplist *)malloc(sizeof(t_maplist));
 	if (!new_node)
 		return (NULL);
+
 	new_node->line = ft_strdup(line);
 	new_node->next = NULL;
 	new_node->prev = NULL;
@@ -22,10 +23,7 @@ void	add_node(char *line, t_maplist **head)
 	if (!new_node)
 		return ;
 	if (*head == NULL)
-	{
 		*head = new_node;
-		// new_node->prev = NULL;
-	}
 	else
 	{
 		temp = *head;

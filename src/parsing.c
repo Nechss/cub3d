@@ -12,6 +12,22 @@
 
 #include "cub3D.h"
 
+void free_list(t_maplist **head)
+{
+	t_maplist	*temp;
+	t_maplist	*next;
+
+	temp = *head;
+	while (temp)
+	{
+		next = temp->next;
+		free(temp->line);
+		free(temp);
+		temp = next;
+	}
+	*head = NULL;
+}
+
 static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 {
 	char	*line;
@@ -50,5 +66,6 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	vetical_parse_map(parse);
 	parse_player(parse);
 	print_parse(parse);
+	// free_list(head);
 //	exit(0);
 }

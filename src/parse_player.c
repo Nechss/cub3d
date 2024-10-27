@@ -65,10 +65,13 @@ void find_player(t_parse *parse)
 		}
 		y++;
 	}
+	if (parse->position[0] == 0 && parse->position[1] == 0)
+		ft_exit("Error: No player found");
 }
 
 void parse_player(t_parse *parse)
 {
 	find_player(parse);
 	check_position(parse);
+	printf("ENTRA\n");
 }

@@ -6,14 +6,6 @@ void	ft_exit(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	free_parse(t_parse *parse)
-{
-	free(parse->tex_n);
-	free(parse->tex_s);
-	free(parse->tex_e);
-	free(parse->tex_w);
-}
-
 void	free_words(char **rslt)
 {
 	int	i;
@@ -26,6 +18,17 @@ void	free_words(char **rslt)
 	}
 	free(rslt);
 }
+
+void	free_parse(t_parse *parse)
+{
+	free(parse->tex_n);
+	free(parse->tex_s);
+	free(parse->tex_e);
+	free(parse->tex_w);
+	free_words(parse->map);
+	printf("entra\n");
+}
+
 
 void	print_parse(t_parse *parse)
 {

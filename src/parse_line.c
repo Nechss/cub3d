@@ -21,7 +21,6 @@ static void	parse_color(char *line, t_parse *parse)
 	char	**colors;
 	int		option;
 	char	*temp;
-	// char	*str;
 
 	colors = NULL;
 	option = 0;
@@ -44,7 +43,6 @@ static void	parse_color(char *line, t_parse *parse)
 
 static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 {
-	//int		last_char;
 	char	*new_line;
 
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w)
@@ -55,25 +53,11 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 		new_line = parse_tabs(line);
 		line = new_line;
 	}
-	//last_char = parse_line_map(line, parse);
-	// if (last_char >= 0 && parse->flags->finish_map != 1)
-	// {
-	// 	last_char++;
-	// 	line[last_char] = '\0';
-	// 	add_node(line, head);
-	// }
-	line[ft_strlen(line) - 1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	parse_line_map(line, parse);
 	add_node(line, head);
 	free(line);
-	// else if (parse->flags->finish_map != 1)
-	// {
-	// 	parse->flags->finish_map = 1;
-	// 	printf("ENTRA\n");
-
-	// }
-	// else
-	// 	ft_exit("Empty line detected\n");
 }
 
 void	check_line(char *line, t_parse *parse, t_maplist **head)
