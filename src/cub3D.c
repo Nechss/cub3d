@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:32:26 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 13:32:30 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:10:48 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int	main(int argc, char **argv)
 	render(&cub);
 	events(&cub);
 	mlx_loop(cub.mlx);
-	free_parse(&parse);
 	return (0);
 }

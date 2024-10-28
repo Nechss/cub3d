@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:33:26 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 14:27:34 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 15:37:33 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	create_map(t_parse *parse, t_maplist **head)
 
 	clean_empty_nodes(head);
 	height = map_height(head);
-	printf("H = %d\n", height);
 	parse->map = (char **)malloc((height + 3) * sizeof(char *));
 	if (!parse->map)
 		ft_exit("Error de malloc");

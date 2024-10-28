@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:23:27 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 14:32:35 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 15:47:28 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	clean_empty_nodes(t_maplist **head)
 	}
 	while (check_empty_line(temp->line))
 	{
-		printf("str = %s\n", temp->line);
 		temp = temp->prev;
 		free(temp->next->line);
 		free(temp->next);

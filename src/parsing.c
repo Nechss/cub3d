@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/28 15:05:54 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:10:33 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,4 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	create_map(parse, head);
 	vetical_parse_map(parse);
 	parse_player(parse);
-	print_parse(parse);
 }

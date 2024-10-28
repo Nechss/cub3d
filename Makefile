@@ -12,27 +12,27 @@ LIBFT       = ./include/libft/libft.a
 
 MLX42_DIR = ./include/mlx
 BUILD_DIR = $(MLX42_DIR)/build
-MLX      = $(BUILD_DIR)/libmlx42.a
+MLX	= $(BUILD_DIR)/libmlx42.a
 
-SRC         = cub3D.c         \
-			init_game.c\
+SRC         = cub3D.c       \
+			init_game.c		\
 			events.c        \
 			events_move.c   \
 			render_map.c    \
 			render_scene.c  \
-			cast_ray.c  \
+			cast_ray.c		\
 			parsing.c		\
 			parse_line.c	\
 			parse_utils.c	\
 			general_utils.c	\
 			parse_line_map.c\
-			build_map.c\
-			build_list.c\
-			init_structs.c\
+			build_map.c		\
+			build_list.c	\
+			init_structs.c	\
 			vertical_parse.c\
-			parse_player.c\
-			parse_tabs.c\
-			node_utils.c\
+			parse_player.c	\
+			parse_tabs.c	\
+			node_utils.c	\
 
 
 
