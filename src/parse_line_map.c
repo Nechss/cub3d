@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_line_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 13:33:02 by mmaltas           #+#    #+#             */
+/*   Updated: 2024/10/28 14:58:47 by mmaltas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 static int	check_first_char(char *str, int i)
@@ -27,7 +39,7 @@ static void	check_char_type(char *str, int i)
 {
 	if (str[i] != '0' && str[i] != '1' && str[i] != 'N'\
 	&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W'\
-	&& str[i] != ' ')	
+	&& str[i] != ' ')
 		ft_exit("Error: bad caracter");
 }
 

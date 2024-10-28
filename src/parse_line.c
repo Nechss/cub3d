@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 13:32:42 by mmaltas           #+#    #+#             */
+/*   Updated: 2024/10/28 14:55:17 by mmaltas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 static void	parse_texture(char *line, t_parse *parse)
 {
 	char	*temp;
+
 	line[ft_strlen(line) - 1] = '\0';
 	temp = trim_spaces(line + 2);
 	if (line[0] == 'N' && line[1] == 'O')
@@ -47,7 +60,6 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 
 	if (!parse->tex_n || !parse->tex_s || !parse->tex_e || !parse->tex_w)
 		ft_exit("Error texture map ocurred / Check the .cub file");
-	
 	if (ft_strncmp(line, "\t", ft_strlen(line)))
 	{
 		new_line = parse_tabs(line);
@@ -66,7 +78,7 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 		parse_texture(line, parse);
 	else if (line[0] == 'F' || line[0] == 'C')
 		parse_color(line, parse);
-	else if (line[0] == '1' || line[0] == ' ' || line[0] == '\t' || line[0] == '\n')
+	else if (line[0] == '1' || line[0] == ' ' || line[0] == '\n')
 	{
 		parse->flags->init_map = 1;
 		parse_map(line, parse, head);

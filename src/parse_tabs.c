@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tabs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/26 18:52:09 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:02:44 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	replace_tabs(char *line, char *new_line)
 
 	i = 0;
 	j = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == '\t')
 		{
@@ -44,7 +44,7 @@ char	*parse_tabs(char *line)
 
 	tabs_count = 0;
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == '\t')
 			tabs_count++;
@@ -55,5 +55,5 @@ char	*parse_tabs(char *line)
 	if (!new_line)
 		ft_exit("Error de Malloc");
 	replace_tabs(line, new_line);
-	return(new_line);
+	return (new_line);
 }

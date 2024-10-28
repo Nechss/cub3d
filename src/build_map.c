@@ -1,60 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 13:33:26 by mmaltas           #+#    #+#             */
+/*   Updated: 2024/10/28 14:27:34 by mmaltas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
-
-int	check_empty_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-	{
-		if (str[i] == ' ')
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void	clean_empty_nodes(t_maplist **head)
-{
-	t_maplist	*temp;
-	// t_maplist	*prev;
-	int			flag_empty;
-
-	flag_empty = 0;
-	temp = *head;
-	while (temp->next != NULL)
-	{
-		if (check_empty_line(temp->line))
-		{
-			flag_empty = 1;
-		}
-		if (!check_empty_line(temp->line) && flag_empty)
-			ft_exit("Error: aqui es empty line in map");
-		temp = temp->next;
-	}
-	//temp = temp->prev;
-	while(check_empty_line(temp->line))
-	{
-		printf("str = %s\n", temp->line);
-		temp = temp->prev;
-		free(temp->next->line);
-		free(temp->next);
-		temp->next = NULL;
-	}
-	// temp = temp->prev;
-	// while(check_empty_line(temp->line))
-	// {
-		
-	// 	printf("str = %s\n", temp->line);
-	// 	prev = temp->prev;
-	// 	// free(temp->line);
-	// 	// free(temp);
-	// 	temp = prev;
-	// 	temp->next = NULL;
-	// }
-	
-}
 
 static int	map_height(t_maplist **head)
 {
@@ -118,18 +74,13 @@ static void	fill_map(t_parse *parse, t_maplist **head)
 			ft_exit("Error in ft_strlcpy");
 		if (temp->next)
 			temp = temp->next;
-		// free(temp->prev->line);
-		// free(temp->prev);
-		// temp->prev = NULL;
 	}
 }
 
 static void	check_extrem_lines(t_parse *parse)
 {
-	//printf("map[1] = %s\n", parse->map[1]);
 	if (ft_strchr(parse->map[1], '0'))
 		ft_exit("Error char '0' on first line");
-	//printf("map[parse->map_height] = %s\n", parse->map[parse->map_height - 2]);
 	if (ft_strchr(parse->map[parse->map_height - 2], '0'))
 		ft_exit("Error char '0' on last line");
 }
@@ -148,6 +99,5 @@ void	create_map(t_parse *parse, t_maplist **head)
 	parse->map_height = height + 2;
 	parse->map_width = map_width(head) + 2;
 	fill_map(parse, head);
-	//free_list(head);
 	check_extrem_lines(parse);
 }

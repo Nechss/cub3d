@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:23 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:05:54 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void free_list(t_maplist **head)
+void	free_list(t_maplist **head)
 {
 	t_maplist	*temp;
 	t_maplist	*next;
@@ -31,7 +31,6 @@ void free_list(t_maplist **head)
 static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 {
 	char	*line;
-	//char	*clean_line;
 	int		fd;
 
 	fd = (open(map_doc, O_RDONLY));
@@ -42,7 +41,6 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		
 		if (!strcmp(line, "\n"))
 		{
 			if (parse->flags->init_map != 1)
@@ -50,7 +48,7 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 				free(line);
 				continue ;
 			}
-			else if(parse->flags->init_map == 1)
+			else if (parse->flags->init_map == 1)
 				parse->flags->finish_map = 1;
 		}
 		check_line(line, parse, head);
@@ -66,6 +64,4 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	vetical_parse_map(parse);
 	parse_player(parse);
 	print_parse(parse);
-	// free_list(head);
-//	exit(0);
 }

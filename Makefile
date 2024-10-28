@@ -32,6 +32,7 @@ SRC         = cub3D.c         \
 			vertical_parse.c\
 			parse_player.c\
 			parse_tabs.c\
+			node_utils.c\
 
 
 

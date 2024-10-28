@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez-b <gperez-b@student.42barcel>       +#+  +:+       +#+        */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/09/26 17:03:05 by mmaltas-         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:26:02 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void	init_struct(t_parse *parse);
 void	vetical_parse_map(t_parse *parse);
 void	parse_player(t_parse *parse);
 char	*parse_tabs(char *line);
+void	clean_empty_nodes(t_maplist **head);
 
 //-------------TEMPORAL---------------//
 void	print_parse(t_parse *parse);

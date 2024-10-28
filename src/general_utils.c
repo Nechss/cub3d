@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   general_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 13:32:50 by mmaltas           #+#    #+#             */
+/*   Updated: 2024/10/28 14:29:59 by mmaltas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	ft_exit(char *str)
@@ -29,7 +41,6 @@ void	free_parse(t_parse *parse)
 	printf("entra\n");
 }
 
-
 void	print_parse(t_parse *parse)
 {
 	int	i;
@@ -47,5 +58,5 @@ void	print_parse(t_parse *parse)
 		printf("-> %s\n", parse->map[i]);
 		i++;
 	}
-	printf ("player = %c\npossition = [%d][%d]\n", parse->player, parse->position[0], parse->position[1]); 
+	printf ("player = %c\npossition = [%d][%d]\n", parse->player, parse->position[0], parse->position[1]);
 }
