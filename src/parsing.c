@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/28 16:10:33 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:40:31 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	get_line(t_parse *parse, char *map_doc, t_maplist **head)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (!strcmp(line, "\n"))
+		if (!ft_strncmp(line, "\n", 1))
 		{
 			if (parse->flags->init_map != 1)
 			{
@@ -61,6 +61,7 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 	init_struct(parse);
 	get_line(parse, map_doc, head);
 	create_map(parse, head);
+	free_list(head);
 	vetical_parse_map(parse);
 	parse_player(parse);
 }

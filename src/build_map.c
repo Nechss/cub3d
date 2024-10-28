@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:33:26 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 15:37:33 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:37:21 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	create_map(t_parse *parse, t_maplist **head)
 	parse->map_height = height + 2;
 	parse->map_width = map_width(head) + 2;
 	fill_map(parse, head);
+	free_list(head);
 	check_extrem_lines(parse);
 }

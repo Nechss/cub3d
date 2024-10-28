@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:32:50 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 14:29:59 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:40:04 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ void	free_words(char **rslt)
 	}
 	free(rslt);
 }
+// void free_list(t_maplist **head)
+// {
+// 	t_maplist *temp;
+	
+// 	temp = *head;
+// 	while (temp->next)
+// 		temp = temp->next;
+// 	while (temp->prev)
+// 	{
+// 		temp = temp->prev;
+// 		free(temp->next->line);
+// 		free(temp->next);
+// 		temp->next = NULL;
+// 	}
+// 	free(temp->line);
+// 	free(temp);
+// }
 
 void	free_parse(t_parse *parse)
 {

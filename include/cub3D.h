@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:29:57 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/28 14:26:02 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 17:36:24 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@
 # define AKEY		65
 # define DKEY		68
 
-
-
-typedef struct 
+typedef struct s_mouse_event
 {
-    int				x;
-    int				y;
-    mouse_key_t 	button;
-    action_t 		action;
-    modifier_key_t	mods;
-} mouse_event_t;
+	int				x;
+	int				y;
+	mouse_key_t		button;
+	action_t		action;
+	modifier_key_t	mods;
+}	t_mouse_event;
 
 typedef struct s_ray
 {
@@ -73,14 +71,14 @@ typedef struct s_ray
 	float	side_y;
 	float	delta_x;
 	float	delta_y;
-} t_ray;
+}	t_ray;
 
 typedef struct s_coor
 {
-	float x;
-	float y;
-	float angle;
-} t_coor;
+	float	x;
+	float	y;
+	float	angle;
+}	t_coor;
 
 typedef struct s_cub
 {
@@ -99,19 +97,19 @@ typedef struct s_cub
 	t_coor			player;
 	float			fov_angle;
 	t_ray			*ray;
-	int	ignore;
+	int				ignore;
 }	t_cub;
 
 typedef struct s_line
 {
-	int	x0;
-	int	y0;
+	int		x0;
+	int		y0;
 	int		ray_x;
 	int		ray_y;
 	float	dx;
 	float	dy;
 	float	angle;
-} t_line;
+}	t_line;
 
 typedef struct s_flags
 {
@@ -140,9 +138,9 @@ typedef struct s_parse
 
 typedef struct s_maplist
 {
-    char			*line;
-    struct s_maplist *next;
-    struct s_maplist *prev;
+	char				*line;
+	struct s_maplist	*next;
+	struct s_maplist	*prev;
 }	t_maplist;
 
 //------------Init----------------//
@@ -163,17 +161,18 @@ void	cast_ray(t_cub *cub, char *wall_hit_direction);
 //------------Events----------------//
 
 void	events(t_cub *cub);
-void	keyboard_in(mlx_key_data_t keydata, void* param);
+void	keyboard_in(mlx_key_data_t keydata, void *param);
 void	move_event(t_cub *cub, float new_x, float new_y);
 void	rotate_event(t_cub *cub);
 
 //-------------Exit---------------//
 
-void	destroy(void* param);
+void	destroy(void *param);
 void	free_map(char **map);
 void	ft_exit(char *str);
 void	free_words(char **rslt);
 void	free_parse(t_parse *parse);
+void	free_list(t_maplist **head);
 
 //-------------Parsing---------------//
 

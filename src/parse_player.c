@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:43:13 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/28 15:01:59 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:49:05 by mmaltas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,14 @@ void	check_position(t_parse *parse)
 {
 	int		x;
 	int		y;
-	int		i;
 	char	**map;
 
 	map = parse->map;
 	y = parse->position[0];
 	x = parse->position[1];
-	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
+	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || \
+	map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 		ft_exit("Error: Bad player position");
-	y -= 1;
-	i = 0;
-	while (i++ <= 2)
-	{
-		if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-			ft_exit("Error: Bad player position 2");
-		y++;
-	}
 }
 
 void	check_player(t_parse *parse, char c, int x, int y)
