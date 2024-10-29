@@ -78,7 +78,8 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 		parse_texture(line, parse);
 	else if (line[0] == 'F' || line[0] == 'C')
 		parse_color(line, parse);
-	else if (line[0] == '1' || line[0] == ' ' || line[0] == '\n')
+	else if (line[0] == '1' || line[0] == ' ' || \
+	line[0] == '\n' || line[0] == '\t')
 	{
 		parse->flags->init_map = 1;
 		parse_map(line, parse, head);

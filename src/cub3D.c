@@ -66,5 +66,5 @@ int	main(int argc, char **argv)
 	render(&cub);
 	events(&cub);
 	mlx_loop(cub.mlx);
-	return (0);
+	exit (0);
 }

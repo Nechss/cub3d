@@ -1,7 +1,7 @@
 # Variables
 NAME        = cub3D
 CC          = gcc
-CFLAGS      = -O3 -Wall -Wextra -Werror -fsanitize=address
+CFLAGS      = -O3 -Wall -Wextra -fsanitize=address -Werror
 INCLUDE     = -I./include -I./include/libft/include
 RM          = rm -f
 
