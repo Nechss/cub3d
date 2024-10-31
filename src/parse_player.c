@@ -46,6 +46,7 @@ void	find_player(t_parse *parse)
 
 	y = 0;
 	map = parse->map;
+	parse->player = '\0';
 	while (map[y])
 	{
 		x = 0;
@@ -58,7 +59,7 @@ void	find_player(t_parse *parse)
 		}
 		y++;
 	}
-	if (parse->position[0] == 0 && parse->position[1] == 0)
+	if (!parse->player)
 		ft_exit("Error: No player found");
 }
 

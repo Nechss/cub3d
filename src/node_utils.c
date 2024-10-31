@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:23:27 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 15:47:28 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/10/29 16:39:37 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clean_empty_nodes(t_maplist **head)
 			flag_empty = 1;
 		}
 		if (!check_empty_line(temp->line) && flag_empty)
-			ft_exit("Error: aqui es empty line in map");
+			ft_exit("Error: empty line in map");
 		temp = temp->next;
 	}
 	while (check_empty_line(temp->line))

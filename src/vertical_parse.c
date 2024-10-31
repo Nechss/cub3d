@@ -17,7 +17,7 @@ static void	loop_parse_map(t_parse *parse, char **map, int x, int y)
 	while (x++ < parse->map_width)
 	{
 		y = 1;
-		while (y < parse->map_height - 2)
+		while (y < parse->map_height - 1)
 		{
 			if (map[y][x] && map[y][x] == ' ')
 			{

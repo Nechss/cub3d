@@ -6,7 +6,8 @@ WE ./textures/planks.png
 EA ./textures/wall512.png
 SO ./textures/planks128.png
 
-	111111
-    11S001
-   	110011
-	111111																																																																																												
+111111      11
+111111      101
+110001      1S1							
+110011       1
+1 11 1       11
