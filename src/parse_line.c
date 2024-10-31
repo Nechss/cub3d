@@ -15,9 +15,11 @@
 static void	parse_texture(char *line, t_parse *parse)
 {
 	char	*temp;
+	char	*new_line;
 
 	line[ft_strlen(line) - 1] = '\0';
-	temp = trim_spaces(line + 2);
+	new_line = parse_tabs(line);
+	temp = trim_spaces(new_line + 2);
 	if (line[0] == 'N' && line[1] == 'O')
 		parse->tex_n = ft_strdup(temp);
 	else if (line[0] == 'S' && line[1] == 'O')
@@ -27,6 +29,7 @@ static void	parse_texture(char *line, t_parse *parse)
 	else if (line[0] == 'W' && line[1] == 'E')
 		parse->tex_w = ft_strdup(temp);
 	free(temp);
+	free(new_line);
 }
 
 static void	parse_color(char *line, t_parse *parse)
@@ -34,6 +37,7 @@ static void	parse_color(char *line, t_parse *parse)
 	char	**colors;
 	int		option;
 	char	*temp;
+	char	*new_line;
 
 	colors = NULL;
 	option = 0;
@@ -42,7 +46,8 @@ static void	parse_color(char *line, t_parse *parse)
 	else if (line[0] == 'C')
 		option = 2;
 	line[ft_strlen(line) - 1] = '\0';
-	temp = trim_spaces(line + 1);
+	new_line = parse_tabs(line);
+	temp = trim_spaces(new_line + 1);
 	colors = ft_split(temp, ',');
 	if (count_rows(colors) != 3)
 		ft_exit("Bad color format");
@@ -52,6 +57,7 @@ static void	parse_color(char *line, t_parse *parse)
 		convert_num_color(colors, parse->color_c);
 	free_words(colors);
 	free(temp);
+	free(new_line);
 }
 
 static void	parse_map(char *line, t_parse *parse, t_maplist **head)
