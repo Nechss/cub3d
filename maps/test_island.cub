@@ -1,10 +1,10 @@
-F 220,100,800
-C 225,30,56
+NO ./textures/SCORP11.png
+WE ./textures/beamskin3.png 
+EA ./textures/beamskin3.png          
+SO ./textures/beamskin.png                         
 
-NO ./textures/Nyellowmossy.png
-SO ./textures/Spurplestone.png   
-EA ./textures/Egreystone.png          
-WE ./textures/Wcobblestone.png 
+F 44,44,44
+C 2,22,222
 
 11111111111111111111111111111
 10000000000000000011100000001
