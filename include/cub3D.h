@@ -128,6 +128,8 @@ typedef struct s_parse
 	char			*tex_w;
 	int				color_c[3];
 	int				color_f[3];
+	int				done_c;
+	int				done_f;
 	int				map_width;
 	int				map_height;
 	char			player;
@@ -178,7 +180,7 @@ void	free_list(t_maplist **head);
 
 void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **tok_list);
 int		parse_line_map(char *str, t_parse *parse);
-void	convert_num_color(char **colors, int color_x[3]);
+void	convert_num_color(char **colors, t_parse *parse, int option);
 char	*trim_spaces(char *str);
 int		count_rows(char **argv);
 void	create_map(t_parse *parse, t_maplist **head);

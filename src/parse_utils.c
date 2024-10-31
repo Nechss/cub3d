@@ -50,12 +50,12 @@ static void	check_if_is_num(char *str)
 static void	check_limits(char *str)
 {
 	if (ft_strlen(str) > 3)
-		ft_exit("Number too long");
+		ft_exit("Number to many digits");
 	if (str[0] == '-')
 		ft_exit("Invalid negative number");
 }
 
-void	convert_num_color(char **colors, int color_x[3])
+void	convert_num_color(char **colors, t_parse *parse, int option)
 {
 	int	i;
 
@@ -65,11 +65,20 @@ void	convert_num_color(char **colors, int color_x[3])
 	{
 		check_if_is_num(colors[i]);
 		check_limits(colors[i]);
-		color_x[i] = ft_atoi(colors[i]);
-		if (color_x[i] > 255)
-			color_x[i] = 255;
-		if (color_x[i] < 0)
-			color_x[i] = 0;
+		if (option == 1)
+		{
+			parse->color_f[i] = ft_atoi(colors[i]);
+			if (parse->color_f[i] > 255 || parse->color_f[i] < 0)
+				ft_exit("Error bad color value");
+			parse->done_f = 1;
+		}
+		if (option == 2)
+		{
+			parse->color_c[i] = ft_atoi(colors[i]);
+			if (parse->color_c[i] > 255 || parse->color_c[i] < 0)
+				ft_exit("Error bad color value");
+			parse->done_c = 1;
+		}
 		i++;
 	}
 }

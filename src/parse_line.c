@@ -45,16 +45,16 @@ static void	parse_color(char *line, t_parse *parse)
 		option = 1;
 	else if (line[0] == 'C')
 		option = 2;
-	line[ft_strlen(line) - 1] = '\0';
+	line[ft_strlen(line)] = '\0';
 	new_line = parse_tabs(line);
 	temp = trim_spaces(new_line + 1);
 	colors = ft_split(temp, ',');
 	if (count_rows(colors) != 3)
 		ft_exit("Bad color format");
 	if (option == 1)
-		convert_num_color(colors, parse->color_f);
+		convert_num_color(colors, parse, option);
 	else if (option == 2)
-		convert_num_color(colors, parse->color_c);
+		convert_num_color(colors, parse, option);
 	free_words(colors);
 	free(temp);
 	free(new_line);
@@ -81,9 +81,17 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 void	check_line(char *line, t_parse *parse, t_maplist **head)
 {
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
+	{
+		if (parse->tex_n && parse->tex_s && parse->tex_e && parse->tex_w)
+			ft_exit("Error too many textures");
 		parse_texture(line, parse);
+	}
 	else if (line[0] == 'F' || line[0] == 'C')
+	{
+		if (parse->done_c == 1 && parse->done_f == 1)
+			ft_exit("Error to many colors");
 		parse_color(line, parse);
+	}
 	else if (line[0] == '1' || line[0] == ' ' || \
 	line[0] == '\n' || line[0] == '\t')
 	{
