@@ -60,7 +60,7 @@ void	convert_num_color(char **colors, t_parse *parse, int option)
 	int	i;
 
 	i = 0;
-	colors[2][ft_strlen(colors[2]) - 1] = '\0';
+	colors[2][ft_strlen(colors[2])] = '\0';
 	while (colors[i])
 	{
 		check_if_is_num(colors[i]);

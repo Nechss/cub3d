@@ -18,16 +18,22 @@ static void	parse_texture(char *line, t_parse *parse)
 	char	*new_line;
 
 	line[ft_strlen(line) - 1] = '\0';
+	if (line && line[2] == '\0')
+		ft_exit("Error in texture");
 	new_line = parse_tabs(line);
 	temp = trim_spaces(new_line + 2);
-	if (line[0] == 'N' && line[1] == 'O')
+	if (!temp[0])
+		ft_exit("Error in texture");
+	if (line[0] == 'N' && line[1] == 'O' && !parse->tex_n)
 		parse->tex_n = ft_strdup(temp);
-	else if (line[0] == 'S' && line[1] == 'O')
+	else if (line[0] == 'S' && line[1] == 'O' && !parse->tex_s)
 		parse->tex_s = ft_strdup(temp);
-	else if (line[0] == 'E' && line[1] == 'A')
+	else if (line[0] == 'E' && line[1] == 'A' && !parse->tex_e)
 		parse->tex_e = ft_strdup(temp);
-	else if (line[0] == 'W' && line[1] == 'E')
+	else if (line[0] == 'W' && line[1] == 'E' && !parse->tex_w)
 		parse->tex_w = ft_strdup(temp);
+	else
+		ft_exit("Error in texture");
 	free(temp);
 	free(new_line);
 }
@@ -45,7 +51,7 @@ static void	parse_color(char *line, t_parse *parse)
 		option = 1;
 	else if (line[0] == 'C')
 		option = 2;
-	line[ft_strlen(line)] = '\0';
+	line[ft_strlen(line) - 1] = '\0';
 	new_line = parse_tabs(line);
 	temp = trim_spaces(new_line + 1);
 	colors = ft_split(temp, ',');

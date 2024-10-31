@@ -1,10 +1,13 @@
-F 220,100,800
-C 225,30,56
+F 0,0,225
+C 0,0,225
 
-NO ./textures/bricks.png
-WE ./textures/planks.png
-EA ./textures/wall512.png
-SO ./textures/planks128.png
+
+
+NO ./textures/SCORP11.png
+WE ./textures/beamskin3.png 
+EA ./textures/beamskin3.png          
+SO textures/beamskin.png 
+
 
 
 
