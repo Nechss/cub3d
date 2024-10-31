@@ -1,10 +1,10 @@
 F 220,100,800
 C 225,30,56
 
-NO ./textures/bricks.png
-WE ./textures/planks.png
-EA ./textures/wall512.png
-SO ./textures/planks128.png
+NO ./textures/Nyellowmossy.png
+SO ./textures/Spurplestone.png   
+EA ./textures/Egreystone.png          
+WE ./textures/Wcobblestone.png 
 
 11111111111111111111111111111
 10000000000000000011100000001
