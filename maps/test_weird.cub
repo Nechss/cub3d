@@ -1,0 +1,20 @@
+
+
+NO ./textures/Nyellowmossy.png
+SO ./textures/Spurplestone.png   
+EA ./textures/Egreystone.png          
+WE ./textures/Wcobblestone.png 
+
+NO
+
+C 60,221,255
+F 120,60,0
+
+
+  11111111111111111111
+  11000000000000000001
+  11000000000000000001
+  11000000S00000000001
+  10000000000000000011
+  10000000000000000011
+  11111111111111111111
