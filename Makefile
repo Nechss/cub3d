@@ -38,9 +38,9 @@ SRC         = cub3D.c       \
 
 OBJ         = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-DEPS        = ./include Makefile ./include/cub3D.h ./include/libft/Makefile ./include/libft/include/libft.h
+DEPS        = ./include Makefile ./include/cub3D.h ./include/libft/Makefile ./include/libft/include/libft.h 
 
-all: $(NAME)
+all: makelibft $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo "Linking objects into $(NAME)..."
@@ -55,13 +55,14 @@ $(BUILD_DIR):
 	@echo "Configuring MLX42..."
 	@cmake -B $(BUILD_DIR) -S $(MLX42_DIR)
 
-$(LIBFT):
-	@$(MAKE) -C ./include/libft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEPS)
 	@mkdir -p $(OBJ_DIR)
 	@echo "Compiling $<..."
 	@$(CC) -c -o $@ $< $(CFLAGS) $(INCLUDE)
+
+makelibft:
+	@$(MAKE) -C ./include/libft
 
 clean:
 	@echo "Cleaning objects..."
