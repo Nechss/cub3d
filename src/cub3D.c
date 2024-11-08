@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:32:26 by mmaltas           #+#    #+#             */
-/*   Updated: 2024/10/28 17:44:57 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:32:43 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ void	free_map(char **map)
 	}
 	free(map);
 }
+void	check_arg(char *argv)
+{
+	int	len;
+
+	len = ft_strlen(argv);
+	if(len <= 4 || ft_strncmp(argv + len - 4, ".cub", 4))
+		ft_exit("Error invalid document");
+}
 
 int	main(int argc, char **argv)
 {
@@ -55,10 +63,10 @@ int	main(int argc, char **argv)
 	tok_list = NULL;
 	if (argc != 2)
 	{
-		parse.flags->close_wall = 4;
-		printf("Usage: ./cub3D <map.cub>\nflag wall == %d\n", flags.close_wall);
+		printf("Usage: ./cub3D <map.cub>\n");
 		exit(EXIT_FAILURE);
 	}
+	check_arg(argv[1]);
 	parsing_doc(argv[1], &parse, &tok_list);
 	set_textures(&parse, &cub);
 	set_win(&cub);

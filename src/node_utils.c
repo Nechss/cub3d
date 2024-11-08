@@ -30,21 +30,19 @@ int	check_empty_line(char *str)
 void	clean_empty_nodes(t_maplist **head)
 {
 	t_maplist	*temp;
-	int			flag_empty;
+	static int	flag_empty;
 
 	flag_empty = 0;
 	temp = *head;
-	while (temp->next != NULL)
+	while (temp != NULL)
 	{
 		if (check_empty_line(temp->line))
-		{
 			flag_empty = 1;
-		}
 		if (!check_empty_line(temp->line) && flag_empty)
 			ft_exit("Error: empty line in map");
 		temp = temp->next;
 	}
-	while (check_empty_line(temp->line))
+	while (temp && check_empty_line(temp->line))
 	{
 		temp = temp->prev;
 		free(temp->next->line);

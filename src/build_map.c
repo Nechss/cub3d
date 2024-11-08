@@ -90,6 +90,7 @@ void	create_map(t_parse *parse, t_maplist **head)
 	int			height;
 
 	clean_empty_nodes(head);
+	printf("sale de clean empty\n");
 	height = map_height(head);
 	parse->map = (char **)malloc((height + 3) * sizeof(char *));
 	if (!parse->map)

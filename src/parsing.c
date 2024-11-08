@@ -6,7 +6,7 @@
 /*   By: mmaltas <mmaltas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 20:36:48 by gperez-b          #+#    #+#             */
-/*   Updated: 2024/10/28 17:40:31 by mmaltas          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:28:56 by mmaltas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 {
 	init_struct(parse);
 	get_line(parse, map_doc, head);
-	create_map(parse, head);
+	if(*head)
+		create_map(parse, head);
+	else
+		ft_exit("Error empty doc");
 	free_list(head);
 	vetical_parse_map(parse);
 	parse_player(parse);
