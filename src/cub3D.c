@@ -43,12 +43,13 @@ void	free_map(char **map)
 	}
 	free(map);
 }
+
 void	check_arg(char *argv)
 {
 	int	len;
 
 	len = ft_strlen(argv);
-	if(len <= 4 || ft_strncmp(argv + len - 4, ".cub", 4))
+	if (len <= 4 || ft_strncmp(argv + len - 4, ".cub", 4))
 		ft_exit("Error invalid document");
 }
 

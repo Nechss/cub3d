@@ -60,7 +60,7 @@ void	parsing_doc(char *map_doc, t_parse *parse, t_maplist **head)
 {
 	init_struct(parse);
 	get_line(parse, map_doc, head);
-	if(*head)
+	if (*head)
 		create_map(parse, head);
 	else
 		ft_exit("Error empty doc");

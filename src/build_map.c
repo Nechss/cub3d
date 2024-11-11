@@ -40,7 +40,8 @@ static int	map_width(t_maplist **head)
 		i = 0;
 		while (temp->line[i])
 			i++;
-		i--;
+		if (i > 0)
+			i--;
 		while (temp->line && temp->line[i] == ' ')
 			i--;
 		if (temp->line[i])
@@ -90,7 +91,6 @@ void	create_map(t_parse *parse, t_maplist **head)
 	int			height;
 
 	clean_empty_nodes(head);
-	printf("sale de clean empty\n");
 	height = map_height(head);
 	parse->map = (char **)malloc((height + 3) * sizeof(char *));
 	if (!parse->map)

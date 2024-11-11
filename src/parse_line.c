@@ -86,6 +86,9 @@ static void	parse_map(char *line, t_parse *parse, t_maplist **head)
 
 void	check_line(char *line, t_parse *parse, t_maplist **head)
 {
+	int	i;
+
+	i = parse->done_c + parse->done_f;
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
 	{
 		if (parse->tex_n && parse->tex_s && parse->tex_e && parse->tex_w)
@@ -98,8 +101,8 @@ void	check_line(char *line, t_parse *parse, t_maplist **head)
 			ft_exit("Error to many colors");
 		parse_color(line, parse);
 	}
-	else if (line[0] == '1' || line[0] == ' ' || \
-	line[0] == '\n' || line[0] == '\t')
+	else if ((line[0] == '1' || line[0] == ' ' || \
+	line[0] == '\n' || line[0] == '\t') && i == 2)
 	{
 		parse->flags->init_map = 1;
 		parse_map(line, parse, head);

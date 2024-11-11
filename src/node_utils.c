@@ -40,6 +40,8 @@ void	clean_empty_nodes(t_maplist **head)
 			flag_empty = 1;
 		if (!check_empty_line(temp->line) && flag_empty)
 			ft_exit("Error: empty line in map");
+		if (temp->next == NULL)
+			break ;
 		temp = temp->next;
 	}
 	while (temp && check_empty_line(temp->line))
